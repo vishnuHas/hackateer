@@ -180,13 +180,8 @@
           <span>Team &amp; Idea</span>
         </div>
         <div class="ws-connector" id="ws-conn-1"></div>
-        <div class="wizard-step-item" id="ws-2">
-          <div class="ws-circle">2</div>
-          <span>Fee</span>
-        </div>
-        <div class="ws-connector" id="ws-conn-2"></div>
         <div class="wizard-step-item" id="ws-3">
-          <div class="ws-circle">3</div>
+          <div class="ws-circle">2</div>
           <span>Confirm</span>
         </div>
         <button class="btn-close-modal-x" id="btn-close-modal-x"><i class="fa-solid fa-xmark"></i></button>
@@ -224,57 +219,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-secondary btn-close-modal" id="btn-close-modal">Cancel</button>
-          <button type="button" class="btn-primary" id="btn-step1-next">Next: Fee Payment <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-
-      <!-- STEP 2: Fee Payment -->
-      <div class="wizard-step-panel hidden" id="step-panel-2">
-        <div class="modal-header">
-          <h2><i class="fa-solid fa-credit-card"></i> Registration Fee</h2>
-          <p class="modal-subtitle">Complete payment to submit your application</p>
-        </div>
-        <div class="modal-body-content fee-panel">
-          <div class="fee-summary-card">
-            <div class="fee-summary-row">
-              <span>Hackathon</span>
-              <strong id="fee-hackathon-name">--</strong>
-            </div>
-            <div class="fee-summary-row">
-              <span>Team</span>
-              <strong id="fee-team-display">--</strong>
-            </div>
-            <div class="fee-summary-divider"></div>
-            <div class="fee-summary-row fee-total-row">
-              <span>Total Due</span>
-              <strong class="fee-amount-big" id="fee-amount-display">Free</strong>
-            </div>
-          </div>
-          <div class="fee-methods" id="fee-methods-section">
-            <p class="fee-methods-label">Select Payment Method</p>
-            <label class="fee-method-option">
-              <input type="radio" name="fee-method" value="upi" checked>
-              <span class="fee-method-box"><i class="fa-solid fa-mobile-screen"></i> UPI / PhonePe / GPay</span>
-            </label>
-            <label class="fee-method-option">
-              <input type="radio" name="fee-method" value="card">
-              <span class="fee-method-box"><i class="fa-solid fa-credit-card"></i> Credit / Debit Card</span>
-            </label>
-            <label class="fee-method-option">
-              <input type="radio" name="fee-method" value="netbanking">
-              <span class="fee-method-box"><i class="fa-solid fa-building-columns"></i> Net Banking</span>
-            </label>
-          </div>
-          <div class="fee-free-notice hidden" id="fee-free-notice">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>This hackathon is <strong>free to enter</strong>! No payment required.</span>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" id="btn-step2-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
-          <button type="button" class="btn-primary" id="btn-step2-pay">
-            <span id="pay-btn-text"><i class="fa-solid fa-lock"></i> Pay &amp; Submit</span>
-          </button>
+          <button type="button" class="btn-primary" id="btn-step1-next">Submit Idea <i class="fa-solid fa-paper-plane"></i></button>
         </div>
       </div>
 

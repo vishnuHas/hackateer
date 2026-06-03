@@ -353,32 +353,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnAddMember        = document.getElementById('btn-add-member');
   const toastSuccess        = document.getElementById('toast-success');
 
+  // Show toast if set in sessionStorage after page reload
+  const storedToast = sessionStorage.getItem('toast_message');
+  if (storedToast && toastSuccess) {
+    sessionStorage.removeItem('toast_message');
+    const toastTitle = toastSuccess.querySelector('h4');
+    const toastText = toastSuccess.querySelector('p');
+    if (toastTitle) toastTitle.textContent = 'Success!';
+    if (toastText) toastText.textContent = storedToast;
+    toastSuccess.classList.add('active');
+    setTimeout(() => {
+      toastSuccess.classList.remove('active');
+      if (toastTitle) toastTitle.textContent = 'Application Submitted!';
+      if (toastText) toastText.textContent = 'Pending admin review. Check back soon for approval status.';
+    }, 4000);
+  }
+
   // Step panels
   const panel1 = document.getElementById('step-panel-1');
-  const panel2 = document.getElementById('step-panel-2');
   const panel3 = document.getElementById('step-panel-3');
 
   // Step indicators
   const ws1 = document.getElementById('ws-1');
-  const ws2 = document.getElementById('ws-2');
   const ws3 = document.getElementById('ws-3');
   const wsConn1 = document.getElementById('ws-conn-1');
-  const wsConn2 = document.getElementById('ws-conn-2');
 
   // Step 1 inputs
   const regTeamName  = document.getElementById('reg-team-name');
   const regIdeaTitle = document.getElementById('reg-idea-title');
   const regIdeaDesc  = document.getElementById('reg-idea-desc');
 
-  // Step 2
-  const feeHackathonName   = document.getElementById('fee-hackathon-name');
-  const feeTeamDisplay     = document.getElementById('fee-team-display');
-  const feeAmountDisplay   = document.getElementById('fee-amount-display');
-  const feeMethodsSection  = document.getElementById('fee-methods-section');
-  const feeFreeNotice      = document.getElementById('fee-free-notice');
-  const payBtnText         = document.getElementById('pay-btn-text');
-
-  // Step 3
+  // Step 3 (Confirmation)
   const confirmTeamName  = document.getElementById('confirm-team-name');
   const confirmIdeaTitle = document.getElementById('confirm-idea-title');
 
@@ -408,17 +413,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setStep(step) {
     currentStep = step;
-    [panel1, panel2, panel3].forEach((p, i) => {
-      p.classList.toggle('hidden', i + 1 !== step);
-    });
+    if (panel1) panel1.classList.toggle('hidden', step !== 1);
+    if (panel3) panel3.classList.toggle('hidden', step !== 2);
+    
     // Update step indicators
-    [ws1, ws2, ws3].forEach((ws, i) => {
-      ws.classList.remove('active', 'done');
-      if (i + 1 < step) ws.classList.add('done');
-      if (i + 1 === step) ws.classList.add('active');
-    });
-    wsConn1.classList.toggle('done', step > 1);
-    wsConn2.classList.toggle('done', step > 2);
+    if (step === 1) {
+      if (ws1) {
+        ws1.classList.add('active');
+        ws1.classList.remove('done');
+      }
+      if (ws3) {
+        ws3.classList.remove('active', 'done');
+      }
+      if (wsConn1) {
+        wsConn1.classList.remove('done');
+      }
+    } else if (step === 2) {
+      if (ws1) {
+        ws1.classList.remove('active');
+        ws1.classList.add('done');
+      }
+      if (ws3) {
+        ws3.classList.add('active');
+        ws3.classList.remove('done');
+      }
+      if (wsConn1) {
+        wsConn1.classList.add('done');
+      }
+    }
   }
 
   // Open wizard or modal depending on state
@@ -653,7 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
       confirmBadgeEl.innerHTML = "&#8987; Pending Approval";
     }
 
-    setStep(3);
+    setStep(2);
 
     // Update count in header
     loadRegisteredCount();
@@ -662,12 +684,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Step 3: Done --- */
   document.getElementById('btn-step3-done').addEventListener('click', () => {
     closeModal();
-    updateApplyButtonState();
-    // Show toast
-    if (toastSuccess) {
-      toastSuccess.classList.add('active');
-      setTimeout(() => toastSuccess.classList.remove('active'), 4000);
-    }
+    sessionStorage.setItem('toast_message', 'Your team\'s idea has been submitted. Check back soon for approval status.');
+    window.location.reload();
   });
 
   /* --- Custom Modals: Copy UPI ID, Payment Submission, Project Submission --- */
@@ -741,22 +759,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       paymentModal.classList.remove('active');
-      await updateApplyButtonState();
-
-      // Show success toast
-      if (toastSuccess) {
-        const toastTitle = toastSuccess.querySelector('h4');
-        const toastText = toastSuccess.querySelector('p');
-        if (toastTitle) toastTitle.textContent = 'Payment Details Submitted!';
-        if (toastText) toastText.textContent = 'Your payment reference is under review. Check back soon for registration verification.';
-        toastSuccess.classList.add('active');
-        setTimeout(() => {
-          toastSuccess.classList.remove('active');
-          // reset text to default
-          if (toastTitle) toastTitle.textContent = 'Application Submitted!';
-          if (toastText) toastText.textContent = 'Pending admin review. Check back soon for approval status.';
-        }, 4000);
-      }
+      sessionStorage.setItem('toast_message', 'Your payment reference is under review. Check back soon for registration verification.');
+      window.location.reload();
     });
   }
 
@@ -817,21 +821,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       projectSubmitModal.classList.remove('active');
-      await updateApplyButtonState();
-
-      // Show success toast
-      if (toastSuccess) {
-        const toastTitle = toastSuccess.querySelector('h4');
-        const toastText = toastSuccess.querySelector('p');
-        if (toastTitle) toastTitle.textContent = 'Project Submitted!';
-        if (toastText) toastText.textContent = 'Your project submission was successful. Good luck!';
-        toastSuccess.classList.add('active');
-        setTimeout(() => {
-          toastSuccess.classList.remove('active');
-          if (toastTitle) toastTitle.textContent = 'Application Submitted!';
-          if (toastText) toastText.textContent = 'Pending admin review. Check back soon for approval status.';
-        }, 4000);
-      }
+      sessionStorage.setItem('toast_message', 'Your project submission was successful. Good luck!');
+      window.location.reload();
     });
   }
 
