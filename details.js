@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populateTracks();
     await loadRegisteredCount();
     await updateApplyButtonState();
+    startCountdown();
   }
 
   /* ==========================================================================
@@ -119,6 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
   async function updateApplyButtonState() {
     const regId = localStorage.getItem(`reg_id_cohort_${cohortId}`);
     if (!regId) {
+      if (cohort && cohort.start_date) {
+        const parts = cohort.start_date.split('-');
+        const targetDate = new Date(parts[0], parts[1] - 1, parts[2]); // local midnight of start_date
+        if (new Date().getTime() >= targetDate.getTime()) {
+          btnSidebarApply.textContent = 'Registration Closed';
+          btnSidebarApply.className   = 'btn-primary btn-apply-now btn-closed';
+          btnSidebarApply.disabled    = true;
+          return;
+        }
+      }
       btnSidebarApply.textContent = 'Apply Now';
       btnSidebarApply.className   = 'btn-primary btn-apply-now';
       btnSidebarApply.disabled    = false;
@@ -135,6 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!data) {
       // Record gone — clear local
       localStorage.removeItem(`reg_id_cohort_${cohortId}`);
+      if (cohort && cohort.start_date) {
+        const parts = cohort.start_date.split('-');
+        const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
+        if (new Date().getTime() >= targetDate.getTime()) {
+          btnSidebarApply.textContent = 'Registration Closed';
+          btnSidebarApply.className   = 'btn-primary btn-apply-now btn-closed';
+          btnSidebarApply.disabled    = true;
+          return;
+        }
+      }
       btnSidebarApply.textContent = 'Apply Now';
       btnSidebarApply.disabled    = false;
       return;
@@ -154,6 +175,63 @@ document.addEventListener('DOMContentLoaded', () => {
       btnSidebarApply.className = 'btn-primary btn-apply-now btn-pending';
       btnSidebarApply.disabled  = true;
     }
+  }
+
+  /* ==========================================================================
+     REGISTRATION COUNTDOWN TIMER
+  ========================================================================== */
+  let countdownInterval = null;
+
+  function startCountdown() {
+    if (!cohort || !cohort.start_date) return;
+
+    const countdownContainer = document.getElementById('countdown-container');
+    const daysEl = document.getElementById('countdown-days');
+    const hoursEl = document.getElementById('countdown-hours');
+    const minutesEl = document.getElementById('countdown-minutes');
+    const secondsEl = document.getElementById('countdown-seconds');
+    const titleEl = document.querySelector('#countdown-container .countdown-title');
+
+    const parts = cohort.start_date.split('-');
+    const targetDate = new Date(parts[0], parts[1] - 1, parts[2]); // local midnight of start_date
+    
+    if (countdownInterval) clearInterval(countdownInterval);
+
+    function update() {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        clearInterval(countdownInterval);
+        if (daysEl) daysEl.textContent = '00';
+        if (hoursEl) hoursEl.textContent = '00';
+        if (minutesEl) minutesEl.textContent = '00';
+        if (secondsEl) secondsEl.textContent = '00';
+        if (titleEl) titleEl.textContent = 'REGISTRATION CLOSED';
+        if (countdownContainer) countdownContainer.classList.add('closed');
+        
+        const regId = localStorage.getItem(`reg_id_cohort_${cohortId}`);
+        if (!regId && btnSidebarApply) {
+          btnSidebarApply.textContent = 'Registration Closed';
+          btnSidebarApply.className = 'btn-primary btn-apply-now btn-closed';
+          btnSidebarApply.disabled = true;
+        }
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    update();
+    countdownInterval = setInterval(update, 1000);
   }
 
   /* ==========================================================================

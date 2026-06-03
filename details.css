@@ -1351,3 +1351,89 @@ body {
 .status-badge.pending { color: #7c3aed; background: rgba(124,58,237,0.08); border-radius: 6px; padding: 2px 8px; font-size: 0.8rem; }
 .status-badge.approved { color: #059669; background: rgba(5,150,105,0.08); border-radius: 6px; padding: 2px 8px; font-size: 0.8rem; }
 .status-badge.rejected { color: #ef4444; background: rgba(239,68,68,0.08); border-radius: 6px; padding: 2px 8px; font-size: 0.8rem; }
+
+/* Registration Countdown Timer Widget */
+.registration-countdown-container {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(124, 58, 237, 0.03) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.registration-countdown-container.closed {
+  background: rgba(239, 68, 68, 0.03);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+.countdown-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.registration-countdown-container.closed .countdown-title {
+  color: var(--accent-red);
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+}
+
+.time-val {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.time-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
+.time-colon {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  margin-top: -12px;
+  animation: colonBlink 1.5s infinite;
+}
+
+@keyframes colonBlink {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.btn-primary.btn-closed {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-tertiary) !important;
+  border: 1px solid var(--border-color) !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
