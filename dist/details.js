@@ -189,8 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // If status is approved but payment is not verified/made yet
-    if (status === 'approved' || status === 'payment_submitted') {
+    // If status is approved but payment is not verified/made yet (and fee not paid yet)
+    if ((status === 'approved' && !isFeePaid) || status === 'payment_submitted') {
       if (status === 'payment_submitted') {
         btnSidebarApply.innerHTML = '<i class="fa-solid fa-hourglass-half"></i> Awaiting Payment Verification';
         btnSidebarApply.className = 'btn-primary btn-apply-now btn-pending';
@@ -387,8 +387,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmTeamName  = document.getElementById('confirm-team-name');
   const confirmIdeaTitle = document.getElementById('confirm-idea-title');
 
-  // Custom modals & UPI config
-  const ADMIN_UPI_ID = "vishnu@upi";
+  // Custom modals & UPI config — loaded dynamically from admin settings
+  let ADMIN_UPI_ID = localStorage.getItem('admin_upi_id') || 'pay@upi';
+  let ADMIN_QR_URL  = localStorage.getItem('admin_qr_url') || '';
+  let ADMIN_PAY_NOTE = localStorage.getItem('admin_payment_note') || '';
+
+  // Try to fetch latest from Supabase admin_settings (non-blocking)
+  (async () => {
+    try {
+      const { data } = await supabaseClient
+        .from('admin_settings')
+        .select('upi_id, qr_code_url, payment_note')
+        .eq('id', 1)
+        .maybeSingle();
+      if (data) {
+        if (data.upi_id)       ADMIN_UPI_ID  = data.upi_id;
+        if (data.qr_code_url)  ADMIN_QR_URL  = data.qr_code_url;
+        if (data.payment_note) ADMIN_PAY_NOTE = data.payment_note;
+      }
+    } catch(e) { /* use localStorage fallback */ }
+  })();
   
   const paymentModal = document.getElementById('payment-modal');
   const btnClosePaymentX = document.getElementById('btn-close-payment-x');
@@ -477,14 +495,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
       regModal.classList.add('active');
     } else if (btnText.includes('Complete Payment')) {
-      // Open UPI Payment Modal
+      // Open UPI Payment Modal — inject dynamic UPI ID and QR code
       const upiIdSpan = document.getElementById('payment-upi-id');
       if (upiIdSpan) upiIdSpan.textContent = ADMIN_UPI_ID;
-      
+
+      // Update QR code: replace mock QR with real image if admin set one
+      const qrWrapper = document.querySelector('#payment-modal .upi-qr-wrapper');
+      if (qrWrapper) {
+        const existingReal = qrWrapper.querySelector('.real-qr-img');
+        if (existingReal) existingReal.remove();
+        if (ADMIN_QR_URL) {
+          // Hide mock QR, show real image
+          const mockQr = qrWrapper.querySelector('.upi-qr-code');
+          if (mockQr) mockQr.style.display = 'none';
+          const realImg = document.createElement('img');
+          realImg.className = 'real-qr-img';
+          realImg.src = ADMIN_QR_URL;
+          realImg.alt = 'Payment QR Code';
+          realImg.style.cssText = 'width:160px;height:160px;object-fit:contain;border-radius:12px;border:2px solid var(--border-color);background:#fff;';
+          qrWrapper.insertBefore(realImg, qrWrapper.firstChild);
+        } else {
+          const mockQr = qrWrapper.querySelector('.upi-qr-code');
+          if (mockQr) mockQr.style.display = '';
+        }
+      }
+
+      // Show payment note if admin set one
+      let noteEl = document.getElementById('payment-admin-note');
+      if (ADMIN_PAY_NOTE) {
+        if (!noteEl) {
+          noteEl = document.createElement('div');
+          noteEl.id = 'payment-admin-note';
+          noteEl.style.cssText = 'display:flex;align-items:flex-start;gap:8px;background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.12);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:0.8rem;color:var(--text-secondary);';
+          noteEl.innerHTML = `<i class="fa-solid fa-circle-info" style="color:var(--accent-blue);margin-top:1px;"></i><span>${ADMIN_PAY_NOTE}</span>`;
+          const firstFormGroup = document.querySelector('#payment-modal .form-group');
+          if (firstFormGroup) firstFormGroup.parentNode.insertBefore(noteEl, firstFormGroup);
+        } else {
+          noteEl.querySelector('span').textContent = ADMIN_PAY_NOTE;
+        }
+      } else if (noteEl) noteEl.remove();
+
       if (paymentDueDisplay) paymentDueDisplay.textContent = `₹${cohort.price}`;
       if (paymentAmountPaid) paymentAmountPaid.value = cohort.price;
       if (paymentUtr) paymentUtr.value = '';
-      
+
       document.querySelectorAll('#payment-modal .form-group').forEach(g => g.classList.remove('invalid'));
       paymentModal.classList.add('active');
     } else if (btnText.includes('Submit Project')) {
