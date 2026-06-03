@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER | The Infinite Hackathon Platform</title>
+  <meta name="description" content="Join Aether - a premier, highly interactive, design-focused hackathon platform. Build, code, ship, and win. Inspired by clean Apple design and GitHub engineering.">
+  
+  <!-- Google Fonts: Space Grotesk (Tech/Headings) and Plus Jakarta Sans (Body/UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for modern UI elements -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+
+  <!-- Header / Navigation -->
+  <header class="navbar-container">
+    <nav class="navbar">
+      <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+        <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block;">
+      </div>
+      
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#tracks" class="nav-link">Tracks</a></li>
+        <li><a href="#bento" class="nav-link">Features</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn-secondary">Portal Login</a>
+        <a href="dashboard.html" class="btn-primary">Register Now</a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Dropdown Navigation -->
+  <div class="mobile-menu">
+    <ul class="mobile-nav-links">
+      <li><a href="#about" class="mobile-nav-link">About</a></li>
+      <li><a href="#tracks" class="mobile-nav-link">Tracks</a></li>
+      <li><a href="#bento" class="mobile-nav-link">Features</a></li>
+      <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
+      <li><a href="dashboard.html" class="btn-secondary mobile-btn">Portal Login</a></li>
+      <li><a href="dashboard.html" class="btn-primary mobile-btn">Register Now</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="about" class="hero-section">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-glowing-orb"></div>
+      
+      <div class="container hero-container">
+        <!-- Small top subtitle -->
+        <span class="hero-mini-subtitle fade-in-up">A DESIGN-FIRST HACKATHON PLATFORM FOR CREATIVE ENGINEERS</span>
+        
+        <!-- Giant Overlapping Typography Stack -->
+        <div class="hero-title-container fade-in-up delay-1">
+          <div class="hero-title-row">AETHER</div>
+          <div class="hero-ampersand">&amp;</div>
+          <div class="hero-title-row">HACK</div>
+          <div class="hero-title-row">PORTAL</div>
+        </div>
+        
+        <div class="hero-ctas fade-in-up delay-2">
+          <a href="dashboard.html" class="btn-primary btn-large btn-white-accent">
+            <span>Join Build Portal</span>
+            <i class="fa-solid fa-arrow-right icon-arrow"></i>
+          </a>
+          <a href="#bento" class="btn-outline btn-large btn-dark-outline">
+            <span>Explore Experience</span>
+          </a>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-indicator fade-in-up delay-3">
+          <span class="indicator-label">SCROLL TO DISCOVER</span>
+          <div class="indicator-mouse">
+            <div class="indicator-wheel"></div>
+          </div>
+        </div>
+
+        <hr class="hero-divider-line fade-in-up delay-4">
+
+        <!-- Intro Description Section (GitHub-style layout below) -->
+        <p class="hero-description fade-in-up delay-4">
+          Aether is the design-first hackathon where developers, designers, and visionaries align. 
+          Spend 36 hours crafting production-grade products and demoing them directly to world-class builders.
+        </p>
+        
+        <!-- Quick stats section -->
+        <div class="hero-stats fade-in-up delay-5">
+          <div class="stat-card">
+            <span class="stat-number">10k+</span>
+            <span class="stat-label">Hackers Worldwide</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Mentors Onsite</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">36h</span>
+            <span class="stat-label">Of Non-Stop Ship</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Free &amp; Open Source</span>
+          </div>
+        </div>
+
+        <!-- Interactive 3D Parallax Code/Design Hero Canvas/Graphic -->
+        <div class="hero-visual fade-in-up delay-5">
+          <div class="mockup-window">
+            <div class="window-header">
+              <div class="window-dot red"></div>
+              <div class="window-dot yellow"></div>
+              <div class="window-dot green"></div>
+              <div class="window-title">aether-workspace.config</div>
+              <div class="window-actions">
+                <i class="fa-solid fa-terminal"></i>
+              </div>
+            </div>
+            <div class="window-body">
+              <div class="code-editor-preview">
+                <div class="editor-sidebar">
+                  <div class="sidebar-item active"><i class="fa-regular fa-file-code"></i> index.js</div>
+                  <div class="sidebar-item"><i class="fa-brands fa-css3-alt"></i> style.css</div>
+                  <div class="sidebar-item"><i class="fa-solid fa-gear"></i> system.json</div>
+                </div>
+                <div class="editor-content">
+                  <pre><code><span class="code-keyword">import</span> { Hackathon } <span class="code-keyword">from</span> <span class="code-string">"aether-core"</span>;
+
+<span class="code-keyword">const</span> application = <span class="code-keyword">new</span> Hackathon({
+  theme: <span class="code-string">"white-mode-ultra"</span>,
+  interactivity: <span class="code-keyword">true</span>,
+  vibe: <span class="code-string">"premium-apple"</span>,
+  objective: <span class="code-string">"ship_amazing_products"</span>
+});
+
+<span class="code-comment">// Initialize the ultimate build loop</span>
+application.on(<span class="code-string">"start"</span>, () => {
+  console.log(<span class="code-string">"🚀 We are building the next big thing..."</span>);
+  application.enableUnboundedCreativity();
+});
+
+application.ship();</code></pre>
+                </div>
+              </div>
+              <div class="visual-canvas-overlay">
+                <div class="spinning-circle-wrapper">
+                  <div class="circle-outer"></div>
+                  <div class="circle-inner">
+                    <span class="logo-inner">▲</span>
+                  </div>
+                </div>
+                <div class="floating-badge text-badge">⚡ Interactive</div>
+                <div class="floating-badge design-badge">✨ Design</div>
+                <div class="floating-badge code-badge">💻 Code</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scrolling Text Marquee Section (Vibrant Accent) -->
+    <section class="marquee-section">
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          <span>SHIP IT FAST</span>
+          <span class="marquee-dot">•</span>
+          <span>NO PLACEHOLDERS</span>
+          <span class="marquee-dot">•</span>
+          <span>DESIGN WITH PASSION</span>
+          <span class="marquee-dot">•</span>
+          <span>DEMOS NOT MEMOS</span>
+          <span class="marquee-dot">•</span>
+          <span>NO POWERPOINTS</span>
+          <span class="marquee-dot">•</span>
+          <span>BUILD IN THE OPEN</span>
+          <span class="marquee-dot">•</span>
+          <span>AETHER 2026</span>
+          <span class="marquee-dot">•</span>
+          <span>SHIP IT FAST</span>
+          <span class="marquee-dot">•</span>
+          <span>NO PLACEHOLDERS</span>
+          <span class="marquee-dot">•</span>
+          <span>DESIGN WITH PASSION</span>
+          <span class="marquee-dot">•</span>
+          <span>DEMOS NOT MEMOS</span>
+          <span class="marquee-dot">•</span>
+          <span>NO POWERPOINTS</span>
+          <span class="marquee-dot">•</span>
+          <span>BUILD IN THE OPEN</span>
+          <span class="marquee-dot">•</span>
+          <span>AETHER 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Variable Tracks Section -->
+    <section id="tracks" class="tracks-section scroll-reveal">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Variable Tracks</h2>
+          <p class="section-subtitle">
+            Fine-tune your project parameters. Use the control panel below to adjust the sliders and discover which hacking track matches your build strategy.
+          </p>
+        </div>
+
+        <div class="tracks-control-grid">
+          <!-- Left: Slider Controls -->
+          <div class="control-panel tilt-target">
+            <h3>Parameters Config</h3>
+            <p class="panel-desc">Drag sliders to adjust focus weight</p>
+            
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">Design &amp; Ux</span>
+                <span class="slider-value" id="val-design">60%</span>
+              </div>
+              <input type="range" min="0" max="100" value="60" class="slider" id="slider-design">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">Engineering Complexity</span>
+                <span class="slider-value" id="val-eng">80%</span>
+              </div>
+              <input type="range" min="0" max="100" value="80" class="slider" id="slider-eng">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">AI &amp; Autonomy</span>
+                <span class="slider-value" id="val-ai">40%</span>
+              </div>
+              <input type="range" min="0" max="100" value="40" class="slider" id="slider-ai">
+            </div>
+            
+            <div class="panel-decorations">
+              <div class="decor-dot"></div>
+              <div class="decor-line"></div>
+            </div>
+          </div>
+
+          <!-- Right: Visual output matching the parameters -->
+          <div class="track-display-card">
+            <div class="track-card-inner">
+              <div class="track-header">
+                <div class="track-badge" id="track-recomm-badge">RECOMMENDED TRACK</div>
+                <div class="track-icon-wrapper" id="track-icon">
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+              </div>
+              
+              <h3 class="track-title" id="track-title">Cognitive Intelligence</h3>
+              <p class="track-description" id="track-desc">
+                For developers building highly scalable machine learning apps, agents, or LLM-driven developer tools. Leverage large scale pipelines and neural interfaces.
+              </p>
+              
+              <div class="track-tags" id="track-tags">
+                <span class="tag">#MachineLearning</span>
+                <span class="tag">#LLMs</span>
+                <span class="tag">#Infrastructure</span>
+              </div>
+
+              <!-- Animated progress meters representing current weights visually inside card -->
+              <div class="track-metrics-visual">
+                <div class="metric-visual-item">
+                  <span>Design</span>
+                  <div class="metric-bar"><div class="metric-fill" id="fill-design" style="width: 60%"></div></div>
+                </div>
+                <div class="metric-visual-item">
+                  <span>Engineering</span>
+                  <div class="metric-bar"><div class="metric-fill" id="fill-eng" style="width: 80%"></div></div>
+                </div>
+                <div class="metric-visual-item">
+                  <span>AI Focus</span>
+                  <div class="metric-bar"><div class="metric-fill" id="fill-ai" style="width: 40%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Grid Section -->
+    <section id="bento" class="bento-section scroll-reveal">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">The Hacking Experience</h2>
+          <p class="section-subtitle">A meticulously structured layout that mirrors our platform's focus on high-fidelity visual layouts, developer agency, and granular progress control.</p>
+        </div>
+
+        <div class="bento-grid">
+          
+          <!-- Bento Card 1: Interactive Timeline (2 Columns wide on Desktop) -->
+          <div class="bento-card col-span-2 tilt-target">
+            <div class="bento-content timeline-widget">
+              <div class="bento-tag">LIVE SCHEDULE</div>
+              <h3 class="bento-card-title">Interactive Timeline</h3>
+              <p class="bento-card-text">Step through the 36-hour schedule. Click each phase to reveal actions, milestones, and deliverables.</p>
+              
+              <div class="timeline-navigation">
+                <div class="timeline-step active" data-step="1">
+                  <div class="step-num">01</div>
+                  <div class="step-label">Kickoff</div>
+                </div>
+                <div class="timeline-step" data-step="2">
+                  <div class="step-num">02</div>
+                  <div class="step-label">Hack Mode</div>
+                </div>
+                <div class="timeline-step" data-step="3">
+                  <div class="step-num">03</div>
+                  <div class="step-label">Showcase</div>
+                </div>
+                <div class="timeline-step" data-step="4">
+                  <div class="step-num">04</div>
+                  <div class="step-label">Awards</div>
+                </div>
+              </div>
+
+              <div class="timeline-details-box">
+                <div class="details-item active" id="details-step-1">
+                  <h4>Phase 1: Registration &amp; Team Formations</h4>
+                  <p>Meet other hackers, form squads, download starter assets, and attend the keynote address by global software architects.</p>
+                  <ul class="details-list">
+                    <li><i class="fa-solid fa-check"></i> Welcome Dinner &amp; Meetup</li>
+                    <li><i class="fa-solid fa-check"></i> Platform Keynote (Livestreamed)</li>
+                    <li><i class="fa-solid fa-check"></i> Team Matching Mixer</li>
+                  </ul>
+                </div>
+                
+                <div class="details-item" id="details-step-2">
+                  <h4>Phase 2: 36-Hour Hackathon Commences</h4>
+                  <p>Fuel up and write code. Access dedicated 1-on-1 mentorship loops with industry professionals and developers.</p>
+                  <ul class="details-list">
+                    <li><i class="fa-solid fa-code"></i> Hacking Begins &amp; Repo Setup</li>
+                    <li><i class="fa-solid fa-bolt"></i> Mid-Point Progress Check-in</li>
+                    <li><i class="fa-solid fa-pizza-slice"></i> Late Night Gaming &amp; Food</li>
+                  </ul>
+                </div>
+
+                <div class="details-item" id="details-step-3">
+                  <h4>Phase 3: Live Demos &amp; Iteration Reviews</h4>
+                  <p>Polish your UI, deploy your builds, and present interactive demos directly to the judging panel in video rooms.</p>
+                  <ul class="details-list">
+                    <li><i class="fa-solid fa-upload"></i> Submissions Due (Git commit lock)</li>
+                    <li><i class="fa-solid fa-display"></i> Interactive Science Fair Demos</li>
+                    <li><i class="fa-solid fa-comments"></i> Peer Feedback Round</li>
+                  </ul>
+                </div>
+
+                <div class="details-item" id="details-step-4">
+                  <h4>Phase 4: Award Ceremony &amp; Post-Event Incubator</h4>
+                  <p>Discover winning projects across all tracks. Get introduced to startup accelerators, VCs, and secure project funding.</p>
+                  <ul class="details-list">
+                    <li><i class="fa-solid fa-trophy"></i> Main &amp; Sponsor Track Prizes</li>
+                    <li><i class="fa-solid fa-rocket"></i> Accelerator Fast-track invites</li>
+                    <li><i class="fa-solid fa-glass-cheers"></i> Afterparty Celebration</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento Card 2: Interactive Team Matcher (1 Column, 2 Rows high) -->
+          <div class="bento-card row-span-2 tilt-target">
+            <div class="bento-content matcher-widget">
+              <div class="bento-tag">NETWORKING</div>
+              <h3 class="bento-card-title">Team Matcher</h3>
+              <p class="bento-card-text">Find your ideal co-founders and developers using our swipe matching simulator.</p>
+              
+              <!-- Tinder-style swipe card container -->
+              <div class="matcher-card-container">
+                <div class="matcher-swipe-card" id="matcher-card">
+                  <div class="card-avatar-wrapper">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop" alt="Hacker Profile" class="card-avatar" id="matcher-img">
+                  </div>
+                  <div class="card-details">
+                    <div class="card-meta">
+                      <span class="card-name" id="matcher-name">Maya Patel</span>
+                      <span class="card-role" id="matcher-role">Designer</span>
+                    </div>
+                    <div class="card-skills" id="matcher-skills">
+                      <span>Figma</span>
+                      <span>WebGL</span>
+                      <span>CSS Art</span>
+                    </div>
+                    <p class="card-bio" id="matcher-bio">"Obsessed with smooth animations and minimal Apple-style visual hierarchies. Looking for a strong React developer."</p>
+                  </div>
+                </div>
+                
+                <!-- Matcher Controls -->
+                <div class="matcher-actions">
+                  <button class="action-btn dislike-btn" id="matcher-dislike" aria-label="Skip">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                  <button class="action-btn like-btn" id="matcher-like" aria-label="Match">
+                    <i class="fa-solid fa-heart"></i>
+                  </button>
+                </div>
+                
+                <!-- Overlay Feedback Success -->
+                <div class="matcher-match-overlay" id="matcher-match-alert">
+                  <div class="overlay-content">
+                    <div class="pulse-ring">▲</div>
+                    <h4>It's a Match!</h4>
+                    <p>Contact saved to portal dashboard.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento Card 3: Interactive CLI Console (1 Column) -->
+          <div class="bento-card tilt-target">
+            <div class="bento-content cli-widget">
+              <div class="bento-tag">DEV TOOLS</div>
+              <h3 class="bento-card-title">Aether CLI Console</h3>
+              <p class="bento-card-text">Initialize, run developer modes, and deploy products from your shell.</p>
+              
+              <div class="cli-mockup">
+                <div class="cli-header">
+                  <span class="cli-dot red"></span>
+                  <span class="cli-dot yellow"></span>
+                  <span class="cli-dot green"></span>
+                  <span class="cli-title">zsh</span>
+                </div>
+                <div class="cli-body">
+                  <div class="cli-line"><span class="cli-prompt">$</span> <span id="cli-command">aether init</span></div>
+                  <div class="cli-output" id="cli-output">✓ Workspace successfully setup! Type "dev" to begin.</div>
+                </div>
+              </div>
+              
+              <div class="cli-buttons">
+                <button class="cli-btn active" data-cmd="init">init</button>
+                <button class="cli-btn" data-cmd="dev">dev</button>
+                <button class="cli-btn" data-cmd="deploy">deploy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento Card 4: Open Source Integration (1 Column) -->
+          <div class="bento-card tilt-target">
+            <div class="bento-content git-widget">
+              <div class="bento-tag">OPEN SOURCE</div>
+              <h3 class="bento-card-title">GitHub Integrated</h3>
+              <p class="bento-card-text">Every commit feeds directly into our automated static verification pipeline.</p>
+              
+              <!-- Animated Git branches representation -->
+              <div class="git-branches-animation">
+                <svg viewBox="0 0 300 120" class="git-svg">
+                  <!-- Main Branch -->
+                  <line x1="20" y1="60" x2="280" y2="60" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="5 5"></line>
+                  <!-- Feature Branch -->
+                  <path d="M 60,60 Q 90,20 140,20 L 220,20 Q 250,60 280,60" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="3 3"></path>
+                  
+                  <!-- Git Nodes -->
+                  <circle cx="40" cy="60" r="6" fill="#0f172a" class="git-node"></circle>
+                  <circle cx="80" cy="60" r="6" fill="#0f172a" class="git-node"></circle>
+                  <circle cx="120" cy="20" r="6" fill="#2563eb" class="git-node pulse-node"></circle>
+                  <circle cx="180" cy="20" r="6" fill="#2563eb" class="git-node"></circle>
+                  <circle cx="240" cy="60" r="6" fill="#0f172a" class="git-node"></circle>
+                  
+                  <text x="35" y="80" font-family="'Space Grotesk', sans-serif" font-size="10" fill="#475569">main</text>
+                  <text x="110" y="42" font-family="'Space Grotesk', sans-serif" font-size="10" fill="#2563eb" font-weight="600">feature/ship</text>
+                </svg>
+                
+                <div class="git-status-message">
+                  <i class="fa-solid fa-circle-notch fa-spin"></i>
+                  <span>Pipeline: Running static performance checks...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- FAQ Accordion Section -->
+    <section id="faq" class="faq-section scroll-reveal">
+      <div class="container faq-container">
+        <div class="section-header">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">Got questions about the application portal, timelines, or qualifications? We have answers.</p>
+        </div>
+
+        <div class="accordion-list">
+          
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>Who is eligible to participate in Aether?</span>
+              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="accordion-body">
+              <p>Aether is open to college students, developers, UI/UX designers, and industry professionals from all over the world. Whether you're an absolute beginner or an expert, we invite you to build with us.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>How large can a hackathon team be?</span>
+              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="accordion-body">
+              <p>Teams can range from 1 to 4 individuals. If you do not have a team prior to registering, don't worry! You can use our interactive Team Matcher on the portal or attend our virtual team-forming mixer on Day 1.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>Is there a cost to register or participate?</span>
+              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="accordion-body">
+              <p>Registration and participation are free for most cohorts. However, some specialized hackathons may require a registration fee. We supply API credits, developer tooling keys, digital workspace tools, and standard swag items to all approved hackers.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>Can I submit a project I started before the event?</span>
+              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="accordion-body">
+              <p>No. All projects must be started and built during the designated 36-hour hacking window. Pre-existing templates and public boilerplate structures may be used, but all core implementation logic must be coded on-site. Commit hashes are tracked.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span>How are submissions evaluated?</span>
+              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="accordion-body">
+              <p>Projects are evaluated on three major metrics: Engineering Complexity, Usability &amp; Product Design, and Originality. The final score is an average from an expert panel of startup founders, tech leads, and product designers.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Call To Action Section (Apple style gradient footer box) -->
+    <section id="register" class="cta-section scroll-reveal">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-grid">
+            <div class="cta-info">
+              <h2>Ready to build something unforgettable?</h2>
+              <p>Secure your spot in the summer cohort. Teams are forming now, and API access keys are distributed on a rolling basis.</p>
+              
+              <div class="cta-form-wrapper">
+                <form id="portal-form" class="cta-form" onsubmit="event.preventDefault(); alert('Success! You are in the queue.');">
+                  <input type="email" placeholder="Enter your developer email" required class="cta-input">
+                  <button type="submit" class="btn-primary btn-cta-submit">
+                    <span>Apply Now</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+            
+            <div class="cta-visual">
+              <div class="terminal-mock">
+                <div class="terminal-bar">
+                  <span class="terminal-dot red"></span>
+                  <span class="terminal-dot yellow"></span>
+                  <span class="terminal-dot green"></span>
+                  <span class="terminal-title">bash</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-line"><span class="t-prompt">$</span> curl -s https://api.aether.build/join</div>
+                  <div class="terminal-line t-response">Checking slots... [OK]</div>
+                  <div class="terminal-line t-response">Analyzing Github portfolio...</div>
+                  <div class="terminal-line t-response">AETHER API Keys status: active</div>
+                  <div class="terminal-line"><span class="t-prompt">$</span> npx aether-cli register --team=none</div>
+                  <div class="terminal-line t-success">✓ Registration queue join code generated: AE-9402X</div>
+                  <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cursor">_</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block;">
+          </div>
+          <p class="brand-desc">The global arena for code architects and visual engineers. Shape ideas into production code.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Github"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links-grid">
+          <div class="footer-column">
+            <h4>Tracks</h4>
+            <ul>
+              <li><a href="#">Artificial Intel</a></li>
+              <li><a href="#">Web3 Systems</a></li>
+              <li><a href="#">Design Languages</a></li>
+              <li><a href="#">Developer Tooling</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Event</h4>
+            <ul>
+              <li><a href="#">Schedule</a></li>
+              <li><a href="#">Mentorship Panel</a></li>
+              <li><a href="#">Tracks &amp; Details</a></li>
+              <li><a href="#">Code of Conduct</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="#">Portal Dashboard</a></li>
+              <li><a href="#">Aether CLI</a></li>
+              <li><a href="#">API Documentation</a></li>
+              <li><a href="#">Static Checker</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 Aether Foundation. Built for developers with passion. MIT License.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Security Info</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Firebase Scripts & Auth Client -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="auth.js"></script>
+
+  <!-- Custom Scripts -->
+  <script src="app.js?v=1.0.1"></script>
+  
+  <!-- Dynamic Landing CTA Handlers based on Auth State -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AetherAuth.checkAuthState(
+        (user) => {
+          // Logged in: Customize landing CTAs for direct portal entry
+          document.querySelectorAll('a[href="dashboard.html"]').forEach(link => {
+            if (link.textContent.trim().toLowerCase().includes('portal login')) {
+              link.innerHTML = '<i class="fa-solid fa-compass"></i> Workspace';
+            }
+            if (link.textContent.trim().toLowerCase().includes('register now')) {
+              link.textContent = 'Enter Workspace';
+            }
+            const span = link.querySelector('span');
+            if (span && span.textContent.trim().toLowerCase().includes('join build portal')) {
+              span.textContent = 'Enter Workspace';
+            }
+          });
+        },
+        () => {
+          // Unauthenticated: Direct Explore buttons straight to login gateway
+          document.querySelectorAll('a[href="dashboard.html"]').forEach(link => {
+            link.href = 'login.html';
+          });
+        }
+      );
+    });
+  </script>
+</body>
+</html>

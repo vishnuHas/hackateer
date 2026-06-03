@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER | Hackathon Details</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="details.css">
+</head>
+<body style="display: none;">
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+  <header class="navbar-container">
+    <nav class="navbar">
+      <div class="nav-logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
+        <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block;">
+      </div>
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn-secondary nav-back-btn">
+          <i class="fa-solid fa-arrow-left"></i> Back to Explorer
+        </a>
+        <div class="live-clock" id="live-clock">18:00</div>
+        <div class="user-profile-menu">
+          <img src="" alt="User Avatar" class="navbar-avatar">
+          <span class="status-dot online"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="details-wrapper">
+    <div class="details-container">
+      <main class="details-main-content">
+        <section class="details-hero">
+          <div class="details-cover-wrapper">
+            <img id="detail-cover" src="" alt="Hackathon Cover Image">
+            <div class="cover-overlay"></div>
+          </div>
+          <div class="details-header-meta">
+            <span class="host-label" id="detail-host">Admin Managed</span>
+            <h1 class="details-title" id="detail-title">Hackathon Title</h1>
+            <div class="meta-row">
+              <span><i class="fa-regular fa-calendar-days"></i> <span id="detail-dates-top">Dates</span></span>
+              <span><i class="fa-solid fa-user-group"></i> <span id="detail-registered-count">0</span> Registered</span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="details-tabs">
+          <a href="#about" class="tab-link active">About</a>
+          <a href="#tracks" class="tab-link">Tracks</a>
+          <a href="#prizes" class="tab-link">Prizes</a>
+        </nav>
+
+        <section class="section-card" id="about">
+          <h3><i class="fa-solid fa-circle-info"></i> About Hackathon</h3>
+          <p id="detail-description">Description goes here...</p>
+        </section>
+
+        <section class="section-card" id="tracks">
+          <h3><i class="fa-solid fa-tags"></i> Focus Tracks &amp; Themes</h3>
+          <div class="tracks-list" id="detail-tracks-list"></div>
+        </section>
+
+        <section class="section-card" id="prizes">
+          <h3><i class="fa-solid fa-trophy text-gold"></i> Prize Pool Details</h3>
+          <div class="prize-pool-highlight-card">
+            <div class="prize-card-inner">
+              <span class="prize-pool-label">TOTAL CASH PRIZES</span>
+              <h2 class="prize-pool-amount" id="detail-prize-amount">&#8377;50,000</h2>
+              <p class="prize-pool-subtext">Distributed among the top qualifying team implementations evaluated by project judges.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="details-sidebar-content">
+        <div class="sticky-sidebar-card">
+          <div class="status-indicator-badge">
+            <span class="status-dot-pulse"></span>
+            <span class="status-badge-text">REGISTRATION OPEN</span>
+          </div>
+          <div class="sidebar-spec-row">
+            <div class="spec-icon"><i class="fa-solid fa-tag"></i></div>
+            <div class="spec-details">
+              <span class="spec-label">REGISTRATION FEE</span>
+              <span class="spec-val" id="detail-sidebar-fee">Free</span>
+            </div>
+          </div>
+          <div class="sidebar-spec-row">
+            <div class="spec-icon"><i class="fa-solid fa-user-group"></i></div>
+            <div class="spec-details">
+              <span class="spec-label">TEAM SIZE LIMITS</span>
+              <span class="spec-val" id="detail-sidebar-team">1 - 4 Members</span>
+            </div>
+          </div>
+          <div class="sidebar-spec-row">
+            <div class="spec-icon"><i class="fa-regular fa-clock"></i></div>
+            <div class="spec-details">
+              <span class="spec-label">PROJECT START DATE</span>
+              <span class="spec-val" id="detail-sidebar-start">June 10, 2026</span>
+            </div>
+          </div>
+          <div class="sidebar-spec-row">
+            <div class="spec-icon"><i class="fa-regular fa-circle-check"></i></div>
+            <div class="spec-details">
+              <span class="spec-label">PROJECT END DATE</span>
+              <span class="spec-val" id="detail-sidebar-end">June 17, 2026</span>
+            </div>
+          </div>
+          <button class="btn-primary btn-apply-now" id="btn-sidebar-apply">Apply Now</button>
+          <button class="btn-secondary btn-share-detail" id="btn-sidebar-share">
+            <i class="fa-solid fa-share-nodes"></i> Share Hackathon
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- 3-STEP REGISTRATION WIZARD MODAL -->
+  <div class="modal-overlay" id="registration-modal">
+    <div class="modal-card wizard-card">
+
+      <!-- Step Progress Header -->
+      <div class="wizard-steps-header">
+        <div class="wizard-step-item active" id="ws-1">
+          <div class="ws-circle">1</div>
+          <span>Team &amp; Idea</span>
+        </div>
+        <div class="ws-connector" id="ws-conn-1"></div>
+        <div class="wizard-step-item" id="ws-2">
+          <div class="ws-circle">2</div>
+          <span>Fee</span>
+        </div>
+        <div class="ws-connector" id="ws-conn-2"></div>
+        <div class="wizard-step-item" id="ws-3">
+          <div class="ws-circle">3</div>
+          <span>Confirm</span>
+        </div>
+        <button class="btn-close-modal-x" id="btn-close-modal-x"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- STEP 1: Team + Idea -->
+      <div class="wizard-step-panel" id="step-panel-1">
+        <div class="modal-header">
+          <h2><i class="fa-solid fa-lightbulb"></i> Team &amp; Idea Pitch</h2>
+          <p class="modal-subtitle">Tell us who you are and what you're building</p>
+        </div>
+        <div class="modal-body-content">
+          <div class="form-group">
+            <label for="reg-team-name">Team Name <span class="required">*</span></label>
+            <input type="text" id="reg-team-name" placeholder="e.g. Zero Knowledge Wizards" required>
+            <span class="error-msg">Please specify your team name.</span>
+          </div>
+          <div class="form-group">
+            <label for="reg-idea-title">Project / Idea Title <span class="required">*</span></label>
+            <input type="text" id="reg-idea-title" placeholder="e.g. Decentralized Identity Passport" required>
+            <span class="error-msg">Please give your project a title.</span>
+          </div>
+          <div class="form-group">
+            <label for="reg-idea-desc">Idea Description <span class="required">*</span></label>
+            <textarea id="reg-idea-desc" rows="4" placeholder="Describe your idea, the problem it solves, and your approach (min 50 characters)..." required></textarea>
+            <span class="error-msg">Please describe your idea (min 50 characters).</span>
+          </div>
+          <div class="members-input-wrapper">
+            <label class="members-input-label">Participants Roster <span id="members-count-badge">(min 1, max 4)</span></label>
+            <div id="dynamic-members-list"></div>
+            <button type="button" class="btn-add-member" id="btn-add-member">
+              <i class="fa-solid fa-plus"></i> Add Team Member
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary btn-close-modal" id="btn-close-modal">Cancel</button>
+          <button type="button" class="btn-primary" id="btn-step1-next">Next: Fee Payment <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Fee Payment -->
+      <div class="wizard-step-panel hidden" id="step-panel-2">
+        <div class="modal-header">
+          <h2><i class="fa-solid fa-credit-card"></i> Registration Fee</h2>
+          <p class="modal-subtitle">Complete payment to submit your application</p>
+        </div>
+        <div class="modal-body-content fee-panel">
+          <div class="fee-summary-card">
+            <div class="fee-summary-row">
+              <span>Hackathon</span>
+              <strong id="fee-hackathon-name">--</strong>
+            </div>
+            <div class="fee-summary-row">
+              <span>Team</span>
+              <strong id="fee-team-display">--</strong>
+            </div>
+            <div class="fee-summary-divider"></div>
+            <div class="fee-summary-row fee-total-row">
+              <span>Total Due</span>
+              <strong class="fee-amount-big" id="fee-amount-display">Free</strong>
+            </div>
+          </div>
+          <div class="fee-methods" id="fee-methods-section">
+            <p class="fee-methods-label">Select Payment Method</p>
+            <label class="fee-method-option">
+              <input type="radio" name="fee-method" value="upi" checked>
+              <span class="fee-method-box"><i class="fa-solid fa-mobile-screen"></i> UPI / PhonePe / GPay</span>
+            </label>
+            <label class="fee-method-option">
+              <input type="radio" name="fee-method" value="card">
+              <span class="fee-method-box"><i class="fa-solid fa-credit-card"></i> Credit / Debit Card</span>
+            </label>
+            <label class="fee-method-option">
+              <input type="radio" name="fee-method" value="netbanking">
+              <span class="fee-method-box"><i class="fa-solid fa-building-columns"></i> Net Banking</span>
+            </label>
+          </div>
+          <div class="fee-free-notice hidden" id="fee-free-notice">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>This hackathon is <strong>free to enter</strong>! No payment required.</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="btn-step2-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          <button type="button" class="btn-primary" id="btn-step2-pay">
+            <span id="pay-btn-text"><i class="fa-solid fa-lock"></i> Pay &amp; Submit</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Confirmation -->
+      <div class="wizard-step-panel hidden" id="step-panel-3">
+        <div class="modal-body-content confirm-panel">
+          <div class="confirm-icon-ring">
+            <i class="fa-solid fa-hourglass-half"></i>
+          </div>
+          <h2 class="confirm-title">Application Submitted!</h2>
+          <p class="confirm-subtitle">Your team's idea is now under review. You'll see the status update once admin approves.</p>
+          <div class="confirm-details-box">
+            <div class="confirm-row"><span>Team</span><strong id="confirm-team-name">--</strong></div>
+            <div class="confirm-row"><span>Idea</span><strong id="confirm-idea-title">--</strong></div>
+            <div class="confirm-row"><span>Status</span><strong class="status-badge pending">&#8987; Pending Approval</strong></div>
+          </div>
+        </div>
+        <div class="modal-footer" style="justify-content:center;">
+          <button type="button" class="btn-primary" id="btn-step3-done">Done</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Success Toast -->
+  <div class="toast" id="toast-success">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <div class="toast-body">
+      <h4>Application Submitted!</h4>
+      <p>Pending admin review. Check back soon for approval status.</p>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="details.js?v=1.0.1"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Admin Console Files (Keep local on PC)
+admin.html
+admin.js
+admin.css
+
+# Local Server & IDE Cache
+node_modules/
+.vscode/
+.idea/
+.DS_Store
+*.log

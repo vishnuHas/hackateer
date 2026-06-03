@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER | Explore Hackathons</title>
+  
+  <!-- Google Fonts: Space Grotesk and Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Styling -->
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body style="display: none;">
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+ 
+  <!-- Header Navigation -->
+  <header class="navbar-container">
+    <nav class="navbar">
+      <div class="nav-logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
+        <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block;">
+      </div>
+      
+      <div class="nav-actions">
+        <button class="icon-action-btn" aria-label="Notifications" id="btn-notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-dot"></span>
+        </button>
+        
+        <div class="live-clock" id="live-clock">18:31</div>
+        
+        <!-- User Profile Details in Header -->
+        <div class="user-profile-menu">
+          <img src="" alt="User Avatar" class="navbar-avatar">
+          <span class="status-dot online"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Dashboard Wrapper -->
+  <div class="dashboard-wrapper">
+    
+    <!-- Unique Workspace Spotlight Banner (Sleek tech grid, blurred gradient mesh) -->
+    <section class="banner-section">
+      <div class="banner-mesh-gradient"></div>
+      <div class="banner-dot-matrix"></div>
+      
+      <div class="banner-container">
+        <!-- Banner Left: Slogan & Intro -->
+        <div class="banner-text">
+          <span class="banner-meta">WORKSPACE ARENA</span>
+          <h1 class="banner-title">
+            BUILD. <span class="accent-glow">ITERATE</span>. SHIP.
+          </h1>
+          <p class="banner-desc">
+            Enter Aether's decentralized workspace. Connect with verified developers, audit codebase pipelines, and deploy production-grade software during active cohorts.
+          </p>
+        </div>
+        
+        <!-- Banner Right: Unique Bento Spotlight Layout (Not carousel) -->
+        <div class="banner-bento-spotlight">
+          <!-- Main featured card -->
+          <div class="bento-main-card">
+            <div class="bento-card-bg" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&h=300&fit=crop');"></div>
+            <div class="bento-card-content">
+              <span class="bento-badge">ACTIVE NOW</span>
+              <h3>Aether Space Hack '26</h3>
+              <p>Design spatial interfaces and canvas layouts for local OS systems.</p>
+              <div class="bento-meta">
+                <span><i class="fa-solid fa-user-group"></i> 1,472 Registered</span>
+                <span class="time-label"><i class="fa-regular fa-clock"></i> 8 hours left</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Stacked mini secondary features -->
+          <div class="bento-side-stack">
+            <div class="bento-side-item">
+              <span class="side-item-tag">AI SYSTEMS</span>
+              <h4>Neural Agent Sandbox</h4>
+              <p>Autonomous pipelines via browser LLMs.</p>
+            </div>
+            
+            <div class="bento-side-item">
+              <span class="side-item-tag">WEB3</span>
+              <h4>Zero-Knowledge Devs</h4>
+              <p>Secure client proofing pipelines.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Center Section: Clean Layout Explorer Controls -->
+    <div class="explorer-controls-section">
+      <div class="explorer-controls-container">
+        <!-- Search & Count spanning full width -->
+        <div class="explorer-search-wrapper" style="width: 100%; justify-content: space-between;">
+          <div class="search-box-minimal" style="width: 280px;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search workspace..." id="dashboard-search">
+          </div>
+          <span class="total-cohorts-badge" id="explore-count-label">6 active systems</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Workspace Body (Masonry/Bento Cards Grid) -->
+    <main class="main-content">
+           <div class="explore-cards-grid" id="explore-grid-container">
+        <!-- Custom cohorts will render here dynamically -->
+      </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Modal overlay for RSVP -->
+  <div class="modal-overlay" id="rsvp-modal">
+    <div class="modal-card">
+      <div class="modal-icon"><i class="fa-solid fa-circle-check text-green"></i></div>
+      <h2>Workspace Verification Success!</h2>
+      <p>Your developer key AE-9402X has been linked to the build pipeline. Audits will execute on git push.</p>
+      <button class="btn-primary btn-close-modal">Access Workspace</button>
+    </div>
+  </div>
+
+  <!-- Core Firebase Scripts & Auth Client -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="auth.js"></script>
+
+  <!-- Custom Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="dashboard.js?v=1.0.1"></script>
+</body>
+</html>
