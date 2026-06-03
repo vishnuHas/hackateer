@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const detailSidebarTeam = document.getElementById('detail-sidebar-team');
   const detailSidebarStart= document.getElementById('detail-sidebar-start');
   const detailSidebarEnd  = document.getElementById('detail-sidebar-end');
+  const detailSidebarRegEnd = document.getElementById('detail-sidebar-reg-end');
+  const detailSidebarSubmitEnd = document.getElementById('detail-sidebar-submit-end');
+  const detailSidebarWinnerDate = document.getElementById('detail-sidebar-winner-date');
   const btnSidebarApply   = document.getElementById('btn-sidebar-apply');
 
   /* ==========================================================================
@@ -68,11 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
     detailCover.alt          = `${cohort.name} Cover`;
     detailDesc.textContent   = cohort.description;
 
-    const startF = formatDateFull(cohort.start_date);
-    const endF   = formatDateFull(cohort.end_date);
     detailDatesTop.textContent    = `${formatDateShort(cohort.start_date)} - ${formatDateShort(cohort.end_date)}`;
-    detailSidebarStart.textContent = startF;
-    detailSidebarEnd.textContent   = endF;
+    detailSidebarRegEnd.textContent = formatDateFull(cohort.registration_end_date || cohort.start_date);
+    detailSidebarStart.textContent = formatDateFull(cohort.start_date);
+    detailSidebarSubmitEnd.textContent = formatDateFull(cohort.submission_end_date || cohort.end_date);
+    detailSidebarEnd.textContent   = formatDateFull(cohort.end_date);
+    detailSidebarWinnerDate.textContent = formatDateFull(cohort.winner_announcement_date || cohort.end_date);
 
     const prizeVal = parseInt(cohort.prize_pool) || 0;
     detailPrize.textContent = prizeVal > 0 ? `₹${prizeVal.toLocaleString('en-IN')}` : '₹0';
@@ -120,9 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
   async function updateApplyButtonState() {
     const regId = localStorage.getItem(`reg_id_cohort_${cohortId}`);
     if (!regId) {
-      if (cohort && cohort.start_date) {
-        const parts = cohort.start_date.split('-');
-        const targetDate = new Date(parts[0], parts[1] - 1, parts[2]); // local midnight of start_date
+      const regDeadline = cohort.registration_end_date || cohort.start_date;
+      if (cohort && regDeadline) {
+        const parts = regDeadline.split('-');
+        const targetDate = new Date(parts[0], parts[1] - 1, parts[2]); // local midnight of deadline
         if (new Date().getTime() >= targetDate.getTime()) {
           btnSidebarApply.textContent = 'Registration Closed';
           btnSidebarApply.className   = 'btn-primary btn-apply-now btn-closed';
@@ -146,8 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!data) {
       // Record gone — clear local
       localStorage.removeItem(`reg_id_cohort_${cohortId}`);
-      if (cohort && cohort.start_date) {
-        const parts = cohort.start_date.split('-');
+      const regDeadline = cohort.registration_end_date || cohort.start_date;
+      if (cohort && regDeadline) {
+        const parts = regDeadline.split('-');
         const targetDate = new Date(parts[0], parts[1] - 1, parts[2]);
         if (new Date().getTime() >= targetDate.getTime()) {
           btnSidebarApply.textContent = 'Registration Closed';
@@ -183,7 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let countdownInterval = null;
 
   function startCountdown() {
-    if (!cohort || !cohort.start_date) return;
+    const regDeadline = cohort?.registration_end_date || cohort?.start_date;
+    if (!cohort || !regDeadline) return;
 
     const countdownContainer = document.getElementById('countdown-container');
     const daysEl = document.getElementById('countdown-days');
@@ -192,8 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const secondsEl = document.getElementById('countdown-seconds');
     const titleEl = document.querySelector('#countdown-container .countdown-title');
 
-    const parts = cohort.start_date.split('-');
-    const targetDate = new Date(parts[0], parts[1] - 1, parts[2]); // local midnight of start_date
+    const parts = regDeadline.split('-');
+    const targetDate = new Date(parts[0], parts[1] - 1, parts[2]); // local midnight of deadline
     
     if (countdownInterval) clearInterval(countdownInterval);
 
