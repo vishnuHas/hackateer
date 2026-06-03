@@ -303,17 +303,6 @@
           <i class="fa-brands fa-google"></i>
           <span>Sign in with Google</span>
         </button>
-        
-        <button class="btn-auth btn-mock" id="btn-login-mock">
-          <i class="fa-solid fa-user-gear"></i>
-          <span>Mock Developer Sandbox</span>
-        </button>
-      </div>
-
-      <!-- Warning if Firebase keys are placeholders -->
-      <div class="config-status-alert" id="config-status-warning">
-        <i class="fa-solid fa-circle-info"></i>
-        <span><strong>Development Sandbox:</strong> Firebase keys are currently placeholders. Google Sign-In requires your Firebase project credentials. Use the Developer Sandbox login option for local review.</span>
       </div>
 
       <div class="login-footer">
@@ -343,26 +332,12 @@
         }
       );
 
-      const warningBanner = document.getElementById('config-status-warning');
       const googleBtn = document.getElementById('btn-login-google');
-      const mockBtn = document.getElementById('btn-login-mock');
-
-      // Detect configuration and hide warning banner if real Firebase is loaded
-      if (AetherAuth.isFirebaseActive()) {
-        if (warningBanner) warningBanner.style.display = 'none';
-      }
 
       // 1. Google Auth handler
       googleBtn.addEventListener('click', async () => {
         if (!AetherAuth.isFirebaseActive()) {
-          alert("Firebase keys are not configured. Standard Google Sign-In requires configuring your credentials in 'firebase-config.js'. Falling back to Mock Developer Login instead.");
-          // Fallback to mock login
-          try {
-            await AetherAuth.signInWithGoogle();
-            window.location.href = 'dashboard.html';
-          } catch (e) {
-            console.error(e);
-          }
+          alert("Firebase keys are not configured. Please enter your credentials in 'firebase-config.js'.");
           return;
         }
 
@@ -376,22 +351,6 @@
           alert("Login error: " + err.message);
           googleBtn.disabled = false;
           googleBtn.innerHTML = '<i class="fa-brands fa-google"></i> Sign in with Google';
-        }
-      });
-
-      // 2. Mock Auth handler
-      mockBtn.addEventListener('click', async () => {
-        try {
-          // Force mock session trigger by temporarily overriding real firebase flag
-          const tempRealFirebase = isRealFirebase;
-          isRealFirebase = false; 
-          
-          await AetherAuth.signInWithGoogle();
-          
-          isRealFirebase = tempRealFirebase; // restore
-          window.location.href = 'dashboard.html';
-        } catch (err) {
-          console.error(err);
         }
       });
 

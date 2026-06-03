@@ -1,24 +1,5 @@
 // Auth module — no port-based routing. All pages served from the same server.
 
-// Check for logout query parameter to clear local session state in local development
-(function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('logout') === 'true') {
-    localStorage.removeItem('aether_mock_user_session');
-    // Clean up query param from browser address bar
-    const cleanUrl = window.location.pathname + window.location.hash;
-    window.history.replaceState({}, document.title, cleanUrl);
-  }
-})();
-
-
-const MOCK_USER = {
-  uid: "dev-sandbox-user-12345",
-  displayName: "Alex Developer",
-  email: "alex@aether.build",
-  photoURL: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&h=120&fit=crop"
-};
-
 let isRealFirebase = false;
 
 // Check if config exists and is configured
@@ -40,11 +21,11 @@ if (detectFirebaseConfig()) {
     isRealFirebase = true;
     console.log("Aether Auth: Firebase initialized successfully.");
   } catch (error) {
-    console.warn("Aether Auth: Firebase initialization failed, falling back to Mock Developer Mode.", error);
+    console.warn("Aether Auth: Firebase initialization failed.", error);
     isRealFirebase = false;
   }
 } else {
-  console.log("Aether Auth: No custom Firebase config keys detected. Running in Mock Developer Mode.");
+  console.log("Aether Auth: Real Firebase credentials not configured in firebase-config.js.");
 }
 
 /**
@@ -59,7 +40,6 @@ const AetherAuth = {
   async signInWithGoogle() {
     if (isRealFirebase) {
       const provider = new firebase.auth.GoogleAuthProvider();
-      // Set custom parameter to hint Google account chooser
       provider.setCustomParameters({ prompt: 'select_account' });
       try {
         const result = await firebase.auth().signInWithPopup(provider);
@@ -69,9 +49,7 @@ const AetherAuth = {
         throw error;
       }
     } else {
-      // Mock Login Mode
-      localStorage.setItem('aether_mock_user_session', JSON.stringify(MOCK_USER));
-      return MOCK_USER;
+      throw new Error("Firebase keys are not configured. Please enter your credentials in 'firebase-config.js'.");
     }
   },
 
@@ -84,28 +62,11 @@ const AetherAuth = {
         console.error("Firebase Sign-Out failed:", error);
       }
     }
-    // Always clear mock session as well
-    localStorage.removeItem('aether_mock_user_session');
-    
     window.location.href = 'login.html';
   },
 
   // Checks Auth state and registers listener callbacks
   checkAuthState(onUser, onUnauth) {
-    // 1. Check local mock session first
-    const mockUserJson = localStorage.getItem('aether_mock_user_session');
-    if (mockUserJson) {
-      try {
-        const user = JSON.parse(mockUserJson);
-        onUser(user);
-        this.syncHeaderProfile(user);
-        return;
-      } catch (e) {
-        localStorage.removeItem('aether_mock_user_session');
-      }
-    }
-
-    // 2. Check Firebase if active
     if (isRealFirebase) {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -116,7 +77,6 @@ const AetherAuth = {
         }
       });
     } else {
-      // Mock mode and no local session -> unauth
       onUnauth();
     }
   },
