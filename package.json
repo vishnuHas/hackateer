@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/vishnuHas/hackateer/issues"
   },
-  "homepage": "https://github.com/vishnuHas/hackateer#readme"
+  "homepage": "https://github.com/vishnuHas/hackateer#readme",
+  "devDependencies": {
+    "wrangler": "^4.97.0"
+  }
 }
