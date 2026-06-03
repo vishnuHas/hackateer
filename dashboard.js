@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       const priceText = hack.price > 0 ? `₹${hack.price}` : 'Free';
-      const prizePoolText = hack.prizePool > 0 ? `₹${Number(hack.prizePool).toLocaleString('en-IN')}` : '₹0';
+      const prizePoolText = hack.prize_pool > 0 ? `₹${Number(hack.prize_pool).toLocaleString('en-IN')}` : '₹0';
       
       card.innerHTML = `
         <img class="card-bg-img" src="${hack.image_url}" alt="${hack.name} Cover">
