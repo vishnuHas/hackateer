@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   updateClock();
-  setInterval(updateClock, 60000);
+  setInterval(updateClock, 1000);
 
   /* ==========================================================================
      3. SLIDER BANNER CAROUSEL

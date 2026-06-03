@@ -969,6 +969,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (clockEl) clockEl.textContent = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
   }
   updateClock();
-  setInterval(updateClock, 60000);
+  setInterval(updateClock, 1000);
 
 });
