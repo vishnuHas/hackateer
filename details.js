@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmIdeaTitle = document.getElementById('confirm-idea-title');
 
   // Custom modals & UPI config — loaded dynamically from admin settings
-  let ADMIN_UPI_ID = localStorage.getItem('admin_upi_id') || 'pay@upi';
+  let ADMIN_UPI_ID = localStorage.getItem('admin_upi_id') !== null ? localStorage.getItem('admin_upi_id') : 'pay@upi';
   let ADMIN_QR_URL  = localStorage.getItem('admin_qr_url') || '';
   let ADMIN_PAY_NOTE = localStorage.getItem('admin_payment_note') || '';
 
@@ -438,9 +438,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .eq('id', 1)
         .maybeSingle();
       if (data) {
-        if (data.upi_id)       ADMIN_UPI_ID  = data.upi_id;
-        if (data.qr_code_url)  ADMIN_QR_URL  = data.qr_code_url;
-        if (data.payment_note) ADMIN_PAY_NOTE = data.payment_note;
+        ADMIN_UPI_ID  = data.upi_id !== null ? data.upi_id : '';
+        ADMIN_QR_URL  = data.qr_code_url !== null ? data.qr_code_url : '';
+        ADMIN_PAY_NOTE = data.payment_note !== null ? data.payment_note : '';
       }
     } catch(e) { /* use localStorage fallback */ }
   })();
@@ -534,7 +534,17 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (btnText.includes('Complete Payment')) {
       // Open UPI Payment Modal — inject dynamic UPI ID and QR code
       const upiIdSpan = document.getElementById('payment-upi-id');
-      if (upiIdSpan) upiIdSpan.textContent = ADMIN_UPI_ID;
+      const upiAddressBox = document.querySelector('#payment-modal .upi-address-box');
+      const upiInstruction = document.querySelector('#payment-modal .upi-instruction');
+
+      if (ADMIN_UPI_ID) {
+        if (upiIdSpan) upiIdSpan.textContent = ADMIN_UPI_ID;
+        if (upiAddressBox) upiAddressBox.style.display = 'flex';
+        if (upiInstruction) upiInstruction.textContent = 'Scan the QR code below or pay directly to the UPI ID:';
+      } else {
+        if (upiAddressBox) upiAddressBox.style.display = 'none';
+        if (upiInstruction) upiInstruction.textContent = 'Scan the QR code below to pay the registration fee:';
+      }
 
       // Update QR code: replace mock QR with real image if admin set one
       const qrWrapper = document.querySelector('#payment-modal .upi-qr-wrapper');
