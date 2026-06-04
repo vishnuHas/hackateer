@@ -2,6 +2,7 @@
 admin.html
 admin.js
 admin.css
+admin-portal/
 
 # Local Server & IDE Cache
 node_modules/

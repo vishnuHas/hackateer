@@ -291,8 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let countdownInterval = null;
 
   function startCountdown() {
-    const regDeadline = cohort?.registration_end_date || cohort?.start_date;
-    if (!cohort || !regDeadline) return;
+    if (!cohort) return;
 
     const countdownContainer = document.getElementById('countdown-container');
     const daysEl = document.getElementById('countdown-days');
@@ -301,30 +300,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const secondsEl = document.getElementById('countdown-seconds');
     const titleEl = document.querySelector('#countdown-container .countdown-title');
 
-    const parts = regDeadline.split('-');
-    const targetDate = new Date(parts[0], parts[1] - 1, parts[2]); // local midnight of deadline
-    
+    function parseLocalDate(dateStr) {
+      if (!dateStr) return null;
+      const parts = dateStr.split('-');
+      if (parts.length !== 3) return null;
+      return new Date(parts[0], parts[1] - 1, parts[2]); // local midnight of deadline
+    }
+
+    const regEnd = parseLocalDate(cohort.registration_end_date || cohort.start_date);
+    const start = parseLocalDate(cohort.start_date);
+    const submitEnd = parseLocalDate(cohort.submission_end_date || cohort.end_date);
+    const end = parseLocalDate(cohort.end_date);
+
     if (countdownInterval) clearInterval(countdownInterval);
 
     function update() {
       const now = new Date();
-      const diff = targetDate.getTime() - now.getTime();
+      
+      let targetDate = null;
+      let titleText = 'REGISTRATION CLOSES IN';
+      let isConcluded = false;
 
-      if (diff <= 0) {
+      if (regEnd && now < regEnd) {
+        targetDate = regEnd;
+        titleText = 'REGISTRATION CLOSES IN';
+      } else if (start && now < start) {
+        targetDate = start;
+        titleText = 'HACKATHON STARTS IN';
+      } else if (submitEnd && now < submitEnd) {
+        targetDate = submitEnd;
+        titleText = 'SUBMISSIONS CLOSE IN';
+      } else if (end && now < end) {
+        targetDate = end;
+        titleText = 'HACKATHON ENDS IN';
+      } else {
+        isConcluded = true;
+        titleText = 'HACKATHON CONCLUDED';
+      }
+
+      if (titleEl) titleEl.textContent = titleText;
+
+      if (isConcluded) {
         clearInterval(countdownInterval);
         if (daysEl) daysEl.textContent = '00';
         if (hoursEl) hoursEl.textContent = '00';
         if (minutesEl) minutesEl.textContent = '00';
         if (secondsEl) secondsEl.textContent = '00';
-        if (titleEl) titleEl.textContent = 'REGISTRATION CLOSED';
         if (countdownContainer) countdownContainer.classList.add('closed');
         
+        // Disable Apply button for unregistered users if registration deadline has passed
         const regId = localStorage.getItem(`reg_id_cohort_${cohortId}`);
         if (!regId && btnSidebarApply) {
           btnSidebarApply.textContent = 'Registration Closed';
           btnSidebarApply.className = 'btn-primary btn-apply-now btn-closed';
           btnSidebarApply.disabled = true;
         }
+        return;
+      }
+
+      // Compute difference
+      const diff = targetDate.getTime() - now.getTime();
+      if (diff <= 0) {
         return;
       }
 
@@ -337,6 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
       if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
       if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+      if (countdownContainer) countdownContainer.classList.remove('closed');
     }
 
     update();
