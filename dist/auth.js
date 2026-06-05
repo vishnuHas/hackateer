@@ -55,6 +55,7 @@ const HackateerAuth = {
 
   // Log Out current session
   async signOutUser() {
+    sessionStorage.removeItem('hackateer_mock_user');
     if (isRealFirebase) {
       try {
         await firebase.auth().signOut();
@@ -67,6 +68,18 @@ const HackateerAuth = {
 
   // Checks Auth state and registers listener callbacks
   checkAuthState(onUser, onUnauth) {
+    const mockUserJson = sessionStorage.getItem('hackateer_mock_user');
+    if (mockUserJson) {
+      try {
+        const mockUser = JSON.parse(mockUserJson);
+        onUser(mockUser);
+        this.syncHeaderProfile(mockUser);
+        return;
+      } catch (e) {
+        console.error("Failed to parse mock user", e);
+      }
+    }
+
     if (isRealFirebase) {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {

@@ -3,603 +3,638 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HACKATEER | The Infinite Hackathon Platform</title>
-  <meta name="description" content="Join Hackateer - a premier, highly interactive, design-focused hackathon platform. Build, code, ship, and win. Inspired by clean Apple design and GitHub engineering.">
+  <title>Hackateer | Build. Ship. Win.</title>
+  <meta name="description" content="Hackateer — the premier hackathon platform where developers, designers, and innovators compete to build world-class products. Join thousands of hackers worldwide.">
   
-  <!-- Google Fonts: Space Grotesk (Tech/Headings) and Plus Jakarta Sans (Body/UI) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome Icons for modern UI elements -->
+  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Custom Styling -->
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Ambient background canvas -->
+  <canvas id="particles-canvas"></canvas>
+  
   <!-- Custom Cursor -->
-  <div class="custom-cursor"></div>
-  <div class="custom-cursor-follower"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
 
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <header class="site-header" id="site-header">
+    <nav class="nav-inner">
+      <a class="nav-brand" href="index.html">Hackateer</a>
 
-  <!-- Header / Navigation -->
-  <header class="navbar-container">
-    <nav class="navbar">
-      <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
-        <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block;">
-      </div>
-      
       <ul class="nav-links">
-        <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#tracks" class="nav-link">Tracks</a></li>
-        <li><a href="#bento" class="nav-link">Features</a></li>
+        <li><a href="#experience" class="nav-link">Features</a></li>
         <li><a href="#faq" class="nav-link">FAQ</a></li>
       </ul>
-      
+
       <div class="nav-actions">
-        <a href="dashboard.html" class="btn-secondary">Portal Login</a>
-        <a href="dashboard.html" class="btn-primary">Register Now</a>
+        <a href="dashboard.html" class="btn-apply-now" id="nav-register-btn">Register Now</a>
+        <a href="dashboard.html" class="btn-portal-login">Portal Login</a>
       </div>
 
-      <!-- Mobile Menu Toggle -->
-      <button class="mobile-menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
       </button>
     </nav>
   </header>
 
-  <!-- Mobile Dropdown Navigation -->
-  <div class="mobile-menu">
-    <ul class="mobile-nav-links">
-      <li><a href="#about" class="mobile-nav-link">About</a></li>
-      <li><a href="#tracks" class="mobile-nav-link">Tracks</a></li>
-      <li><a href="#bento" class="mobile-nav-link">Features</a></li>
-      <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
-      <li><a href="dashboard.html" class="btn-secondary mobile-btn">Portal Login</a></li>
-      <li><a href="dashboard.html" class="btn-primary mobile-btn">Register Now</a></li>
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul>
+      <li><a href="#tracks">Tracks</a></li>
+      <li><a href="#experience">Features</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="dashboard.html" class="btn-apply-now">Register Now</a></li>
+      <li><a href="dashboard.html" class="btn-portal-login">Portal Login</a></li>
     </ul>
   </div>
 
   <main>
-    <!-- Hero Section -->
-    <section id="about" class="hero-section">
-      <div class="hero-bg-grid"></div>
-      <div class="hero-glowing-orb"></div>
-      
-      <div class="container hero-container">
-        <!-- Small top subtitle -->
-        <span class="hero-mini-subtitle fade-in-up">A DESIGN-FIRST HACKATHON PLATFORM FOR CREATIVE ENGINEERS</span>
-        
-        <!-- Giant Overlapping Typography Stack -->
-        <div class="hero-title-container fade-in-up delay-1">
-          <div class="hero-title-row">HACKATEER</div>
-          <div class="hero-ampersand">&amp;</div>
-          <div class="hero-title-row">HACK</div>
-          <div class="hero-title-row">PORTAL</div>
-        </div>
-        
-        <div class="hero-ctas fade-in-up delay-2">
-          <a href="dashboard.html" class="btn-primary btn-large btn-white-accent">
-            <span>Join Build Portal</span>
-            <i class="fa-solid fa-arrow-right icon-arrow"></i>
-          </a>
-          <a href="#bento" class="btn-outline btn-large btn-dark-outline">
-            <span>Explore Experience</span>
-          </a>
-        </div>
 
-        <!-- Scroll Down Indicator -->
-        <div class="scroll-indicator fade-in-up delay-3">
-          <span class="indicator-label">SCROLL TO DISCOVER</span>
-          <div class="indicator-mouse">
-            <div class="indicator-wheel"></div>
+    <!-- ============================================================
+         HERO SECTION (HACKATEER LIGHT THEME)
+    ============================================================ -->
+    <section class="hero-hackateer" id="about">
+      <div class="hero-hackateer-inner">
+        <!-- Main Title -->
+        <h1 class="hackateer-title">
+          <span class="title-word reveal-up" style="--delay:0.1s">HACKATEER</span>
+          <span class="title-word title-hack reveal-up" style="--delay:0.25s">HACK</span>
+          <span class="title-word reveal-up" style="--delay:0.4s">PORTAL</span>
+        </h1>
+
+        <!-- Middle Interactive Row -->
+        <div class="hackateer-interactive reveal-fade" style="--delay:0.1s">
+          <!-- Left Image Column -->
+          <div class="interactive-column left-column">
+            <img src="images/left.jpeg" alt="Join Build Portal" class="hero-side-img">
+          </div>
+
+          <!-- Center Column -->
+          <div class="interactive-column center-column">
+            <video src="images/mess_video.mp4" autoplay loop muted playsinline class="hero-side-img"></video>
+          </div>
+
+          <!-- Right Image Column -->
+          <div class="interactive-column right-column">
+            <img src="images/right.jpeg" alt="Portal Gates" class="hero-side-img">
           </div>
         </div>
 
-        <hr class="hero-divider-line fade-in-up delay-4">
-
-        <!-- Intro Description Section (GitHub-style layout below) -->
-        <p class="hero-description fade-in-up delay-4">
-          Hackateer is the design-first hackathon where developers, designers, and visionaries align. 
-          Spend 36 hours crafting production-grade products and demoing them directly to world-class builders.
-        </p>
-        
-        <!-- Quick stats section -->
-        <div class="hero-stats fade-in-up delay-5">
-          <div class="stat-card">
-            <span class="stat-number">0+</span>
-            <span class="stat-label">Hackers Worldwide</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">0+</span>
-            <span class="stat-label">Mentors Onsite</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">36h</span>
-            <span class="stat-label">Of Non-Stop Ship</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">100%</span>
-            <span class="stat-label">Free &amp; Open Source</span>
+        <!-- Center Caption & Indicator (Moved Down) -->
+        <div class="hackateer-indicator-group reveal-fade" style="--delay:0.15s">
+          <div class="nebula-caption">PORTAL PROTOCOL ACTIVE</div>
+          <div class="mouse-scroll-indicator">
+            <span class="mouse-body">
+              <span class="mouse-wheel"></span>
+            </span>
           </div>
         </div>
 
-        <!-- Interactive 3D Parallax Code/Design Hero Canvas/Graphic -->
-        <div class="hero-visual fade-in-up delay-5">
-          <div class="mockup-window">
-            <div class="window-header">
-              <div class="window-dot red"></div>
-              <div class="window-dot yellow"></div>
-              <div class="window-dot green"></div>
-              <div class="window-title">hackateer-workspace.config</div>
-              <div class="window-actions">
-                <i class="fa-solid fa-terminal"></i>
-              </div>
-            </div>
-            <div class="window-body">
-              <div class="code-editor-preview">
-                <div class="editor-sidebar">
-                  <div class="sidebar-item active"><i class="fa-regular fa-file-code"></i> index.js</div>
-                  <div class="sidebar-item"><i class="fa-brands fa-css3-alt"></i> style.css</div>
-                  <div class="sidebar-item"><i class="fa-solid fa-gear"></i> system.json</div>
-                </div>
-                <div class="editor-content">
-                  <pre><code><span class="code-keyword">import</span> { Hackathon } <span class="code-keyword">from</span> <span class="code-string">"hackateer-core"</span>;
-
-<span class="code-keyword">const</span> application = <span class="code-keyword">new</span> Hackathon({
-  theme: <span class="code-string">"white-mode-ultra"</span>,
-  interactivity: <span class="code-keyword">true</span>,
-  vibe: <span class="code-string">"premium-apple"</span>,
-  objective: <span class="code-string">"ship_amazing_products"</span>
-});
-
-<span class="code-comment">// Initialize the ultimate build loop</span>
-application.on(<span class="code-string">"start"</span>, () => {
-  console.log(<span class="code-string">"🚀 We are building the next big thing..."</span>);
-  application.enableUnboundedCreativity();
-});
-
-application.ship();</code></pre>
-                </div>
-              </div>
-              <div class="visual-canvas-overlay">
-                <div class="spinning-circle-wrapper">
-                  <div class="circle-outer"></div>
-                  <div class="circle-inner">
-                    <span class="logo-inner">▲</span>
-                  </div>
-                </div>
-                <div class="floating-badge text-badge">⚡ Interactive</div>
-                <div class="floating-badge design-badge">✨ Design</div>
-                <div class="floating-badge code-badge">💻 Code</div>
-              </div>
-            </div>
+        <!-- Bottom Stats Row -->
+        <div class="hackateer-stats-row reveal-fade" style="--delay:0.2s">
+          <div class="hackateer-stat-item">
+            <span class="hackateer-stat-val" data-target="0">0</span><span class="hackateer-stat-suffix">+</span>
+            <span class="hackateer-stat-lbl">Developers Globally</span>
+          </div>
+          <div class="hackateer-stat-item">
+            <span class="hackateer-stat-val" data-target="0">0</span><span class="hackateer-stat-suffix">+</span>
+            <span class="hackateer-stat-lbl">Projects Created</span>
+          </div>
+          <div class="hackateer-stat-item">
+            <span class="hackateer-stat-val" data-target="36">0</span><span class="hackateer-stat-suffix">h</span>
+            <span class="hackateer-stat-lbl">Hacking Sprint</span>
+          </div>
+          <div class="hackateer-stat-item">
+            <span class="hackateer-stat-val" data-target="100">0</span><span class="hackateer-stat-suffix">%</span>
+            <span class="hackateer-stat-lbl">Free to Enter</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Scrolling Text Marquee Section (Vibrant Accent) -->
-    <section class="marquee-section">
-      <div class="marquee-wrapper">
-        <div class="marquee-track">
-          <span>SHIP IT FAST</span>
-          <span class="marquee-dot">•</span>
-          <span>NO PLACEHOLDERS</span>
-          <span class="marquee-dot">•</span>
-          <span>DESIGN WITH PASSION</span>
-          <span class="marquee-dot">•</span>
-          <span>DEMOS NOT MEMOS</span>
-          <span class="marquee-dot">•</span>
-          <span>NO POWERPOINTS</span>
-          <span class="marquee-dot">•</span>
-          <span>BUILD IN THE OPEN</span>
-          <span class="marquee-dot">•</span>
-          <span>HACKATEER 2026</span>
-          <span class="marquee-dot">•</span>
-          <span>SHIP IT FAST</span>
-          <span class="marquee-dot">•</span>
-          <span>NO PLACEHOLDERS</span>
-          <span class="marquee-dot">•</span>
-          <span>DESIGN WITH PASSION</span>
-          <span class="marquee-dot">•</span>
-          <span>DEMOS NOT MEMOS</span>
-          <span class="marquee-dot">•</span>
-          <span>NO POWERPOINTS</span>
-          <span class="marquee-dot">•</span>
-          <span>BUILD IN THE OPEN</span>
-          <span class="marquee-dot">•</span>
-          <span>HACKATEER 2026</span>
-        </div>
+    <!-- ============================================================
+         GRAPH IMAGE SECTION (after hero)
+    ============================================================ -->
+    <section class="graph-image-section" id="network-stats">
+      <div class="container text-center">
+        <img src="images/graph.jpeg" alt="Network Graph" class="graph-static-image reveal-fade">
       </div>
     </section>
 
-    <!-- Variable Tracks Section -->
-    <section id="tracks" class="tracks-section scroll-reveal">
+
+    <!-- ============================================================
+         MARQUEE STRIP
+    ============================================================ -->
+    <section class="marquee-strip reveal-fade">
+      <div class="marquee-track" aria-hidden="true">
+        <span>SHIP FAST</span><span class="mx">◆</span>
+        <span>DESIGN FIRST</span><span class="mx">◆</span>
+        <span>BUILD IN PUBLIC</span><span class="mx">◆</span>
+        <span>NO MEMOS — DEMOS</span><span class="mx">◆</span>
+        <span>36 HOURS</span><span class="mx">◆</span>
+        <span>OPEN SOURCE</span><span class="mx">◆</span>
+        <span>HACKATEER 2026</span><span class="mx">◆</span>
+        <span>SHIP FAST</span><span class="mx">◆</span>
+        <span>DESIGN FIRST</span><span class="mx">◆</span>
+        <span>BUILD IN PUBLIC</span><span class="mx">◆</span>
+        <span>NO MEMOS — DEMOS</span><span class="mx">◆</span>
+        <span>36 HOURS</span><span class="mx">◆</span>
+        <span>OPEN SOURCE</span><span class="mx">◆</span>
+        <span>HACKATEER 2026</span><span class="mx">◆</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TRACKS SECTION
+    ============================================================ -->
+    <section class="section tracks-section" id="tracks">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Variable Tracks</h2>
-          <p class="section-subtitle">
-            Fine-tune your project parameters. Use the control panel below to adjust the sliders and discover which hacking track matches your build strategy.
+        <div class="tracks-header reveal-up">
+          <h2 class="section-title">Choose Your Challenge</h2>
+          <p class="section-desc">
+            Fine-tune your parameters. Select your build track and define your strategy.
           </p>
         </div>
 
-        <div class="tracks-control-grid">
-          <!-- Left: Slider Controls -->
-          <div class="control-panel tilt-target scroll-reveal" style="--delay: 0.1s">
-            <h3>Parameters Config</h3>
-            <p class="panel-desc">Drag sliders to adjust focus weight</p>
-            
-            <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Design &amp; Ux</span>
-                <span class="slider-value" id="val-design">60%</span>
-              </div>
-              <input type="range" min="0" max="100" value="60" class="slider" id="slider-design">
+        <!-- Mock Browser Window Container -->
+        <div class="tracks-browser-wrapper reveal-up" style="--delay:0.2s">
+          <div class="tracks-browser">
+          <!-- Browser Header -->
+          <div class="browser-header">
+            <div class="browser-dots">
+              <span class="b-dot b-dot--red"></span>
+              <span class="b-dot b-dot--yellow"></span>
+              <span class="b-dot b-dot--green"></span>
             </div>
-
-            <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Engineering Complexity</span>
-                <span class="slider-value" id="val-eng">80%</span>
-              </div>
-              <input type="range" min="0" max="100" value="80" class="slider" id="slider-eng">
+            <div class="browser-address">
+              <i class="fa-solid fa-lock"></i>
+              <span>hackateer-intelligence</span>
             </div>
-
-            <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">AI &amp; Autonomy</span>
-                <span class="slider-value" id="val-ai">40%</span>
-              </div>
-              <input type="range" min="0" max="100" value="40" class="slider" id="slider-ai">
-            </div>
-            
-            <div class="panel-decorations">
-              <div class="decor-dot"></div>
-              <div class="decor-line"></div>
+            <div class="browser-actions">
+              <i class="fa-regular fa-clone"></i>
             </div>
           </div>
 
-          <!-- Right: Visual output matching the parameters -->
-          <div class="track-display-card scroll-reveal" style="--delay: 0.2s">
-            <div class="track-card-inner">
-              <div class="track-header">
-                <div class="track-badge" id="track-recomm-badge">RECOMMENDED TRACK</div>
-                <div class="track-icon-wrapper" id="track-icon">
-                  <i class="fa-solid fa-brain"></i>
-                </div>
+          <!-- Browser Workspace -->
+          <div class="browser-body">
+            <!-- 1. Left Sidebar Navigation -->
+            <div class="browser-sidebar">
+              <div class="sidebar-top">
+                <button class="sb-item" aria-label="Dashboard"><i class="fa-solid fa-gauge-high"></i></button>
+                <button class="sb-item sb-item--active" aria-label="Tracks"><i class="fa-solid fa-diagram-project"></i></button>
+                <button class="sb-item" aria-label="Status"><i class="fa-regular fa-circle-check"></i></button>
+                <button class="sb-item" aria-label="Security"><i class="fa-solid fa-lock"></i></button>
               </div>
-              
-              <h3 class="track-title" id="track-title">Cognitive Intelligence</h3>
-              <p class="track-description" id="track-desc">
-                For developers building highly scalable machine learning apps, agents, or LLM-driven developer tools. Leverage large scale pipelines and neural interfaces.
-              </p>
-              
-              <div class="track-tags" id="track-tags">
-                <span class="tag">#MachineLearning</span>
-                <span class="tag">#LLMs</span>
-                <span class="tag">#Infrastructure</span>
+              <div class="sidebar-bottom">
+                <button class="sb-item" aria-label="Settings"><i class="fa-solid fa-sliders"></i></button>
+              </div>
+            </div>
+
+            <!-- 2. Left Panel: Parameters & Track List -->
+            <div class="browser-left-panel">
+              <div class="panel-section reveal-up" style="--delay:0.1s">
+                <h3 class="panel-title">Parameters Config</h3>
+                <p class="panel-sub">Fine-tune your build parameters</p>
+
+                <div class="sliders-list">
+                  <!-- Design Slider -->
+                  <div class="slider-item">
+                    <div class="slider-row">
+                      <span class="sl-label">Design & UX</span>
+                      <span class="sl-val" id="val-design">60%</span>
+                    </div>
+                    <div class="slider-wrap">
+                      <input type="range" min="0" max="100" value="60" class="range-slider" id="slider-design">
+                      <div class="range-fill" id="fill-design" style="width:60%"></div>
+                    </div>
+                  </div>
+
+                  <!-- Engineering Slider -->
+                  <div class="slider-item">
+                    <div class="slider-row">
+                      <span class="sl-label">Engineering</span>
+                      <span class="sl-val" id="val-eng">80%</span>
+                    </div>
+                    <div class="slider-wrap">
+                      <input type="range" min="0" max="100" value="80" class="range-slider" id="slider-eng">
+                      <div class="range-fill" id="fill-eng" style="width:80%"></div>
+                    </div>
+                  </div>
+
+                  <!-- AI Focus Slider -->
+                  <div class="slider-item">
+                    <div class="slider-row">
+                      <span class="sl-label">AI Focus</span>
+                      <span class="sl-val" id="val-ai">40%</span>
+                    </div>
+                    <div class="slider-wrap">
+                      <input type="range" min="0" max="100" value="40" class="range-slider" id="slider-ai">
+                      <div class="range-fill" id="fill-ai" style="width:40%"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <!-- Animated progress meters representing current weights visually inside card -->
-              <div class="track-metrics-visual">
-                <div class="metric-visual-item">
-                  <span>Design</span>
-                  <div class="metric-bar"><div class="metric-fill" id="fill-design" style="width: 60%"></div></div>
+              <!-- Tracks List -->
+              <div class="panel-section tracks-list-section reveal-up" style="--delay:0.2s">
+                <h4 class="list-title">Build Tracks</h4>
+                <div class="tracks-sidebar-list">
+                  <!-- Design Track Card -->
+                  <div class="track-list-card" data-category="design" id="card-design">
+                    <div class="tl-card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div class="tl-card-content">
+                      <span class="tl-card-title">Immersive UI/UX</span>
+                      <span class="tl-card-sub">WebGL & Visual Engineering</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right tl-card-chevron"></i>
+                  </div>
+
+                  <!-- Engineering Track Card -->
+                  <div class="track-list-card" data-category="eng" id="card-eng">
+                    <div class="tl-card-icon"><i class="fa-solid fa-server"></i></div>
+                    <div class="tl-card-content">
+                      <span class="tl-card-title">Distributed Engines</span>
+                      <span class="tl-card-sub">Systems & WASM Dev</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right tl-card-chevron"></i>
+                  </div>
+
+                  <!-- AI Track Card -->
+                  <div class="track-list-card" data-category="ai" id="card-ai">
+                    <div class="tl-card-icon"><i class="fa-solid fa-brain"></i></div>
+                    <div class="tl-card-content">
+                      <span class="tl-card-title">Cognitive Intelligence</span>
+                      <span class="tl-card-sub">Autonomous AI & ML Systems</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right tl-card-chevron"></i>
+                  </div>
                 </div>
-                <div class="metric-visual-item">
-                  <span>Engineering</span>
-                  <div class="metric-bar"><div class="metric-fill" id="fill-eng" style="width: 80%"></div></div>
+              </div>
+            </div>
+
+            <!-- 3. Workspace (Center / Right) -->
+            <div class="browser-workspace">
+              <!-- Back button -->
+              <button class="workspace-back-btn" id="workspace-back"><i class="fa-solid fa-chevron-left"></i> Back</button>
+
+              <!-- Central Canvas network graphic -->
+              <div class="workspace-visual-container">
+                <canvas id="tracks-network-canvas"></canvas>
+              </div>
+
+              <!-- Recommendation Card Overlay -->
+              <div class="track-result-overlay reveal-slide-right" id="track-result" style="--delay:0.3s">
+                <div class="tr-overlay-header">
+                  <span class="tr-tag" id="track-tag">RECOMMENDED TRACK</span>
+                  <div class="tr-overlay-badge"><i class="fa-solid fa-shield-halved"></i></div>
                 </div>
-                <div class="metric-visual-item">
-                  <span>AI Focus</span>
-                  <div class="metric-bar"><div class="metric-fill" id="fill-ai" style="width: 40%"></div></div>
+                <h3 class="tr-title" id="track-title">Distributed Engines</h3>
+                <p class="tr-desc" id="track-desc">
+                  Build lightweight compilers, WASM microkernels, decentralized systems, or custom DB engines. Ideal for core systems engineers.
+                </p>
+                <div class="tr-tags" id="track-tags">
+                  <span>#WASM</span><span>#Rust</span><span>#Systems</span><span>#Compilers</span>
+                </div>
+                <div class="tr-meters">
+                  <div class="meter-row">
+                    <span>Design Focus</span>
+                    <div class="meter-bar"><div class="meter-fill" id="mf-design" style="width:60%"></div></div>
+                  </div>
+                  <div class="meter-row">
+                    <span>Engineering Focus</span>
+                    <div class="meter-bar"><div class="meter-fill" id="mf-eng" style="width:80%"></div></div>
+                  </div>
+                  <div class="meter-row">
+                    <span>AI Focus</span>
+                    <div class="meter-bar"><div class="meter-fill" id="mf-ai" style="width:40%"></div></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>
 
-    <!-- Bento Grid Section -->
-    <section id="bento" class="bento-section">
+    <!-- ============================================================
+         EXPERIENCE / BENTO SECTION
+    ============================================================ -->
+    <section class="section experience-section" id="experience">
+      <!-- Top connector line -->
+      <div class="exp-connector-top">
+        <div class="exp-connector-line"></div>
+        <div class="exp-connector-dot"></div>
+      </div>
+
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">The Hacking Experience</h2>
-          <p class="section-subtitle">A meticulously structured layout that mirrors our platform's focus on high-fidelity visual layouts, developer agency, and granular progress control.</p>
+        <div class="exp-header reveal-up">
+          <h2 class="exp-title">The Hacking Experience</h2>
+          <p class="exp-subtitle">A meticulously structured environment built for developers who demand excellence.</p>
         </div>
 
+        <!-- 3-column bento grid -->
         <div class="bento-grid">
-          
-          <!-- Bento Card 1: Interactive Timeline (2 Columns wide on Desktop) -->
-          <div class="bento-card col-span-2 tilt-target scroll-reveal" style="--delay: 0.1s">
-            <div class="bento-content timeline-widget">
-              <div class="bento-tag">LIVE SCHEDULE</div>
-              <h3 class="bento-card-title">Interactive Timeline</h3>
-              <p class="bento-card-text">Step through the 36-hour schedule. Click each phase to reveal actions, milestones, and deliverables.</p>
-              
-              <div class="timeline-navigation">
-                <div class="timeline-step active" data-step="1">
-                  <div class="step-num">01</div>
-                  <div class="step-label">Kickoff</div>
-                </div>
-                <div class="timeline-step" data-step="2">
-                  <div class="step-num">02</div>
-                  <div class="step-label">Hack Mode</div>
-                </div>
-                <div class="timeline-step" data-step="3">
-                  <div class="step-num">03</div>
-                  <div class="step-label">Showcase</div>
-                </div>
-                <div class="timeline-step" data-step="4">
-                  <div class="step-num">04</div>
-                  <div class="step-label">Awards</div>
-                </div>
+
+          <!-- Card 1: Interactive Timeline (spans 2 cols, row 1) -->
+          <div class="bento-card b-timeline reveal-up" style="--delay:0.1s">
+            <div class="bc-tag">LAST EXVMITY</div>
+            <h3 class="bc-title">Interactive Timeline</h3>
+            <p class="bc-sub">Fese fasingsile fait ognu E fusfive. Pie tis a frigribad to otaad in thins, ramainsas, and loflov slues.</p>
+
+            <!-- Segment Control Tabs -->
+            <div class="timeline-tabs">
+              <button class="tt-btn active" data-step="1">
+                <span class="tt-num">00</span>
+                <span class="tt-text">fiuberf</span>
+              </button>
+              <button class="tt-btn" data-step="2">
+                <span class="tt-num">01</span>
+                <span class="tt-text">Rad I' Solaie</span>
+              </button>
+              <button class="tt-btn" data-step="3">
+                <span class="tt-num">02</span>
+                <span class="tt-text">Brecionse</span>
+              </button>
+              <button class="tt-btn" data-step="4">
+                <span class="tt-num">03</span>
+                <span class="tt-text">Pnildian</span>
+              </button>
+            </div>
+
+            <!-- Timeline Panels -->
+            <div class="timeline-panels">
+              <div class="tp-panel active" id="tp-1">
+                <h4>Fncne v Exgarisastic &amp; Tanic Irmorinins</h4>
+                <p>Fean prolxaefevator ia or rpe fso fIatve panir lerse boohe reitist arcof he hagotez a filvoinrg g'leuil erdi easoa:lt artzns.</p>
+                <ul class="tp-list">
+                  <li><i class="fa-solid fa-check"></i> Regraositien a Stollef</li>
+                  <li><i class="fa-solid fa-check"></i> Performance ir andablished</li>
+                  <li><i class="fa-solid fa-check"></i> Fumezitre dlrest</li>
+                </ul>
               </div>
-
-              <div class="timeline-details-box">
-                <div class="details-item active" id="details-step-1">
-                  <h4>Phase 1: Registration &amp; Team Formations</h4>
-                  <p>Meet other hackers, form squads, download starter assets, and attend the keynote address by global software architects.</p>
-                  <ul class="details-list">
-                    <li><i class="fa-solid fa-check"></i> Welcome Dinner &amp; Meetup</li>
-                    <li><i class="fa-solid fa-check"></i> Platform Keynote (Livestreamed)</li>
-                    <li><i class="fa-solid fa-check"></i> Team Matching Mixer</li>
-                  </ul>
-                </div>
-                
-                <div class="details-item" id="details-step-2">
-                  <h4>Phase 2: 36-Hour Hackathon Commences</h4>
-                  <p>Fuel up and write code. Access dedicated 1-on-1 mentorship loops with industry professionals and developers.</p>
-                  <ul class="details-list">
-                    <li><i class="fa-solid fa-code"></i> Hacking Begins &amp; Repo Setup</li>
-                    <li><i class="fa-solid fa-bolt"></i> Mid-Point Progress Check-in</li>
-                    <li><i class="fa-solid fa-pizza-slice"></i> Late Night Gaming &amp; Food</li>
-                  </ul>
-                </div>
-
-                <div class="details-item" id="details-step-3">
-                  <h4>Phase 3: Live Demos &amp; Iteration Reviews</h4>
-                  <p>Polish your UI, deploy your builds, and present interactive demos directly to the judging panel in video rooms.</p>
-                  <ul class="details-list">
-                    <li><i class="fa-solid fa-upload"></i> Submissions Due (Git commit lock)</li>
-                    <li><i class="fa-solid fa-display"></i> Interactive Science Fair Demos</li>
-                    <li><i class="fa-solid fa-comments"></i> Peer Feedback Round</li>
-                  </ul>
-                </div>
-
-                <div class="details-item" id="details-step-4">
-                  <h4>Phase 4: Award Ceremony &amp; Post-Event Incubator</h4>
-                  <p>Discover winning projects across all tracks. Get introduced to startup accelerators, VCs, and secure project funding.</p>
-                  <ul class="details-list">
-                    <li><i class="fa-solid fa-trophy"></i> Main &amp; Sponsor Track Prizes</li>
-                    <li><i class="fa-solid fa-rocket"></i> Accelerator Fast-track invites</li>
-                    <li><i class="fa-solid fa-glass-cheers"></i> Afterparty Celebration</li>
-                  </ul>
-                </div>
+              <div class="tp-panel" id="tp-2">
+                <h4>Phase 2: 36-Hour Hackathon Commences</h4>
+                <p>Fuel up and write code. Access dedicated 1-on-1 mentorship with industry professionals.</p>
+                <ul class="tp-list">
+                  <li><i class="fa-solid fa-code"></i> Hacking Begins &amp; Repo Setup</li>
+                  <li><i class="fa-solid fa-bolt"></i> Mid-Point Progress Check-in</li>
+                  <li><i class="fa-solid fa-pizza-slice"></i> Late Night Gaming &amp; Food</li>
+                </ul>
+              </div>
+              <div class="tp-panel" id="tp-3">
+                <h4>Phase 3: Live Demos &amp; Iteration Reviews</h4>
+                <p>Polish your UI, deploy your builds, and present interactive demos to the judging panel.</p>
+                <ul class="tp-list">
+                  <li><i class="fa-solid fa-upload"></i> Submissions Due (Git commit lock)</li>
+                  <li><i class="fa-solid fa-display"></i> Interactive Science Fair Demos</li>
+                  <li><i class="fa-solid fa-comments"></i> Peer Feedback Round</li>
+                </ul>
+              </div>
+              <div class="tp-panel" id="tp-4">
+                <h4>Phase 4: Award Ceremony &amp; Incubator</h4>
+                <p>Discover winning projects. Get introduced to startup accelerators, VCs, and secure funding.</p>
+                <ul class="tp-list">
+                  <li><i class="fa-solid fa-trophy"></i> Main &amp; Sponsor Track Prizes</li>
+                  <li><i class="fa-solid fa-rocket"></i> Accelerator Fast-track invites</li>
+                  <li><i class="fa-solid fa-champagne-glasses"></i> Afterparty Celebration</li>
+                </ul>
               </div>
             </div>
           </div>
 
-          <!-- Bento Card 2: Interactive Team Matcher (1 Column, 2 Rows high) -->
-          <div class="bento-card row-span-2 tilt-target scroll-reveal" style="--delay: 0.2s">
-            <div class="bento-content matcher-widget">
-              <div class="bento-tag">NETWORKING</div>
-              <h3 class="bento-card-title">Team Matcher</h3>
-              <p class="bento-card-text">Find your ideal co-founders and developers using our swipe matching simulator.</p>
-              
-              <!-- Tinder-style swipe card container -->
-              <div class="matcher-card-container">
-                <div class="matcher-swipe-card" id="matcher-card">
-                  <div class="card-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop" alt="Hacker Profile" class="card-avatar" id="matcher-img">
-                  </div>
-                  <div class="card-details">
-                    <div class="card-meta">
-                      <span class="card-name" id="matcher-name">Maya Patel</span>
-                      <span class="card-role" id="matcher-role">Designer</span>
-                    </div>
-                    <div class="card-skills" id="matcher-skills">
-                      <span>Figma</span>
-                      <span>WebGL</span>
-                      <span>CSS Art</span>
-                    </div>
-                    <p class="card-bio" id="matcher-bio">"Obsessed with smooth animations and minimal Apple-style visual hierarchies. Looking for a strong React developer."</p>
-                  </div>
-                </div>
-                
-                <!-- Matcher Controls -->
-                <div class="matcher-actions">
-                  <button class="action-btn dislike-btn" id="matcher-dislike" aria-label="Skip">
-                    <i class="fa-solid fa-xmark"></i>
-                  </button>
-                  <button class="action-btn like-btn" id="matcher-like" aria-label="Match">
-                    <i class="fa-solid fa-heart"></i>
-                  </button>
-                </div>
-                
-                <!-- Overlay Feedback Success -->
-                <div class="matcher-match-overlay" id="matcher-match-alert">
-                  <div class="overlay-content">
-                    <div class="pulse-ring">▲</div>
-                    <h4>It's a Match!</h4>
-                    <p>Contact saved to portal dashboard.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Card 2: Team Matcher (spans 2 rows, col 3) -->
+          <div class="bento-card b-matcher reveal-up" style="--delay:0.2s">
+            <div class="bc-tag">EXF SH2T11C</div>
+            <h3 class="bc-title">Team Matcher</h3>
+            <p class="bc-sub">This geor fisvohvis has hklrts pad iibsolubons errit gimc xtripondas forgasvo iane.</p>
 
-          <!-- Bento Card 3: Interactive CLI Console (1 Column) -->
-          <div class="bento-card tilt-target scroll-reveal" style="--delay: 0.3s">
-            <div class="bento-content cli-widget">
-              <div class="bento-tag">DEV TOOLS</div>
-              <h3 class="bento-card-title">Hackateer CLI Console</h3>
-              <p class="bento-card-text">Initialize, run developer modes, and deploy products from your shell.</p>
-              
-              <div class="cli-mockup">
-                <div class="cli-header">
-                  <span class="cli-dot red"></span>
-                  <span class="cli-dot yellow"></span>
-                  <span class="cli-dot green"></span>
-                  <span class="cli-title">zsh</span>
-                </div>
-                <div class="cli-body">
-                  <div class="cli-line"><span class="cli-prompt">$</span> <span id="cli-command">hackateer init</span></div>
-                  <div class="cli-output" id="cli-output">✓ Workspace successfully setup! Type "dev" to begin.</div>
-                </div>
-              </div>
-              
-              <div class="cli-buttons">
-                <button class="cli-btn active" data-cmd="init">init</button>
-                <button class="cli-btn" data-cmd="dev">dev</button>
-                <button class="cli-btn" data-cmd="deploy">deploy</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bento Card 4: Open Source Integration (1 Column) -->
-          <div class="bento-card tilt-target scroll-reveal" style="--delay: 0.4s">
-            <div class="bento-content git-widget">
-              <div class="bento-tag">OPEN SOURCE</div>
-              <h3 class="bento-card-title">GitHub Integrated</h3>
-              <p class="bento-card-text">Every commit feeds directly into our automated static verification pipeline.</p>
-              
-              <!-- Animated Git branches representation -->
-              <div class="git-branches-animation">
-                <svg viewBox="0 0 300 120" class="git-svg">
-                  <!-- Main Branch -->
-                  <line x1="20" y1="60" x2="280" y2="60" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="5 5"></line>
-                  <!-- Feature Branch -->
-                  <path d="M 60,60 Q 90,20 140,20 L 220,20 Q 250,60 280,60" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="3 3"></path>
-                  
-                  <!-- Git Nodes -->
-                  <circle cx="40" cy="60" r="6" fill="#0f172a" class="git-node"></circle>
-                  <circle cx="80" cy="60" r="6" fill="#0f172a" class="git-node"></circle>
-                  <circle cx="120" cy="20" r="6" fill="#2563eb" class="git-node pulse-node"></circle>
-                  <circle cx="180" cy="20" r="6" fill="#2563eb" class="git-node"></circle>
-                  <circle cx="240" cy="60" r="6" fill="#0f172a" class="git-node"></circle>
-                  
-                  <text x="35" y="80" font-family="'Space Grotesk', sans-serif" font-size="10" fill="#475569">main</text>
-                  <text x="110" y="42" font-family="'Space Grotesk', sans-serif" font-size="10" fill="#2563eb" font-weight="600">feature/ship</text>
+            <div class="matcher-wrap">
+              <!-- Network graph background -->
+              <div class="matcher-network-bg">
+                <div class="net-node node-1"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=60&q=80" alt=""></div>
+                <div class="net-node node-2"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=60&q=80" alt=""></div>
+                <div class="net-node node-3"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=60&q=80" alt=""></div>
+                <div class="net-node node-4"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=60&q=80" alt=""></div>
+                <div class="net-node node-5"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=60&q=80" alt=""></div>
+                <div class="net-node node-ghost node-l"></div>
+                <div class="net-node node-ghost node-r"></div>
+                <svg class="net-lines" viewBox="0 0 300 160" preserveAspectRatio="none">
+                  <!-- top center to mid left & mid right -->
+                  <line x1="150" y1="18" x2="60" y2="68" stroke="#d1d5db" stroke-width="1"/>
+                  <line x1="150" y1="18" x2="240" y2="68" stroke="#d1d5db" stroke-width="1"/>
+                  <!-- mid left to bottom center -->
+                  <line x1="60" y1="68" x2="90" y2="120" stroke="#d1d5db" stroke-width="1"/>
+                  <!-- mid right to bottom center -->
+                  <line x1="240" y1="68" x2="210" y2="120" stroke="#d1d5db" stroke-width="1"/>
+                  <!-- left edge ghost -->
+                  <line x1="60" y1="68" x2="10" y2="90" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="3 3"/>
+                  <!-- right edge ghost -->
+                  <line x1="240" y1="68" x2="290" y2="90" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="3 3"/>
                 </svg>
-                
-                <div class="git-status-message">
-                  <i class="fa-solid fa-circle-notch fa-spin"></i>
-                  <span>Pipeline: Running static performance checks...</span>
+              </div>
+
+              <!-- Swipe card -->
+              <div class="matcher-card" id="matcher-card">
+                <img src="" alt="" class="m-avatar" id="m-avatar">
+                <div class="m-info">
+                  <div class="m-header-row">
+                    <strong id="m-name">Maya Patel</strong>
+                    <span class="m-id" id="m-id">15967550</span>
+                  </div>
+                  <span class="m-role" id="m-role">Coach · Crioting · fssttine</span>
+                  <p class="m-bio" id="m-bio">"This soienta friux-anthna/xs-estico:he opaotoassine/filttest wrinkwei ed tuioapitions h: the ioesioa theremp clone frsw lomacts..."</p>
                 </div>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="matcher-actions">
+                <button class="ma-btn skip" id="ma-skip"><i class="fa-solid fa-xmark"></i></button>
+                <button class="ma-btn like" id="ma-like"><i class="fa-solid fa-heart"></i></button>
+              </div>
+
+              <div class="match-toast" id="match-toast"><span>🎉 It's a Match!</span></div>
+            </div>
+          </div>
+
+          <!-- Card 3: Hackateer CLI Console (col 1, row 2) -->
+          <div class="bento-card b-console reveal-up" style="--delay:0.3s">
+            <div class="bc-tag">AFN E02S</div>
+            <h3 class="bc-title">Hackateer CLI Console</h3>
+            <p class="bc-sub">linkat qumo. tHne xkixy the flob and arthies prasback from your lirci?</p>
+            <div class="cli-window">
+              <div class="cli-bar">
+                <span class="cli-dot r"></span>
+                <span class="cli-dot y"></span>
+                <span class="cli-dot g"></span>
+                <span class="cli-filename">zsh</span>
+              </div>
+              <div class="cli-body">
+                <div class="cli-line">
+                  <span class="cli-prompt">$</span>
+                  <span id="cli-cmd">hackateer init</span>
+                </div>
+                <div class="cli-out" id="cli-out">✓ Workspace ready. Type "dev" to begin.</div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-
-    <!-- FAQ Accordion Section -->
-    <section id="faq" class="faq-section">
-      <div class="container faq-container">
-        <div class="section-header">
-          <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-subtitle">Got questions about the application portal, timelines, or qualifications? We have answers.</p>
-        </div>
-
-        <div class="accordion-list">
-          
-          <div class="accordion-item scroll-reveal" style="--delay: 0.1s">
-            <button class="accordion-header">
-              <span>Who is eligible to participate in Hackateer?</span>
-              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="accordion-body">
-              <p>Hackateer is open to college students, developers, UI/UX designers, and industry professionals from all over the world. Whether you're an absolute beginner or an expert, we invite you to build with us.</p>
-            </div>
-          </div>
-
-          <div class="accordion-item scroll-reveal" style="--delay: 0.15s">
-            <button class="accordion-header">
-              <span>How large can a hackathon team be?</span>
-              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="accordion-body">
-              <p>Teams can range from 1 to 4 individuals. If you do not have a team prior to registering, don't worry! You can use our interactive Team Matcher on the portal or attend our virtual team-forming mixer on Day 1.</p>
-            </div>
-          </div>
-
-          <div class="accordion-item scroll-reveal" style="--delay: 0.2s">
-            <button class="accordion-header">
-              <span>Is there a cost to register or participate?</span>
-              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="accordion-body">
-              <p>Registration and participation are free for most cohorts. However, some specialized hackathons may require a registration fee. We supply API credits, developer tooling keys, digital workspace tools, and standard swag items to all approved hackers.</p>
-            </div>
-          </div>
-
-          <div class="accordion-item scroll-reveal" style="--delay: 0.25s">
-            <button class="accordion-header">
-              <span>Can I submit a project I started before the event?</span>
-              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="accordion-body">
-              <p>No. All projects must be started and built during the designated 36-hour hacking window. Pre-existing templates and public boilerplate structures may be used, but all core implementation logic must be coded on-site. Commit hashes are tracked.</p>
-            </div>
-          </div>
-
-          <div class="accordion-item scroll-reveal" style="--delay: 0.3s">
-            <button class="accordion-header">
-              <span>How are submissions evaluated?</span>
-              <span class="accordion-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="accordion-body">
-              <p>Projects are evaluated on three major metrics: Engineering Complexity, Usability &amp; Product Design, and Originality. The final score is an average from an expert panel of startup founders, tech leads, and product designers.</p>
+          <!-- Card 4: GitHub Integrated (col 2, row 2) -->
+          <div class="bento-card b-github reveal-up" style="--delay:0.4s">
+            <div class="bc-tag">BIGB B11NSS</div>
+            <h3 class="bc-title">GitHub Integrated</h3>
+            <p class="bc-sub">6 pginepes hel sysui? wosut hls fcrru a ecrecintiale acros carthurino dicroeschs.</p>
+            <div class="git-visual">
+              <svg viewBox="0 0 260 90" class="git-svg" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="gitGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#6366f1"/>
+                    <stop offset="100%" style="stop-color:#a855f7"/>
+                  </linearGradient>
+                </defs>
+                <!-- Main branch line -->
+                <line x1="10" y1="60" x2="250" y2="60" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4"/>
+                <!-- Feature branch curve -->
+                <path d="M 50,60 Q 70,22 110,22 L 180,22 Q 215,22 230,60" fill="none" stroke="url(#gitGrad)" stroke-width="2.2"/>
+                <!-- Dots on main branch -->
+                <circle cx="30" cy="60" r="4.5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="50" cy="60" r="4.5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="230" cy="60" r="4.5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+                <!-- Dots on feature branch -->
+                <circle cx="110" cy="22" r="5" fill="#6366f1" class="git-pulse"/>
+                <circle cx="180" cy="22" r="5" fill="#6366f1"/>
+                <!-- Labels -->
+                <text x="18" y="78" font-size="8" fill="#94a3b8" font-family="JetBrains Mono, monospace">main</text>
+                <text x="118" y="14" font-size="8" fill="#6366f1" font-family="JetBrains Mono, monospace" font-weight="600">Nantblhls</text>
+              </svg>
             </div>
           </div>
 
         </div>
       </div>
+
+      <!-- Bottom connector line -->
+      <div class="exp-connector-bot">
+        <div class="exp-connector-dot"></div>
+        <div class="exp-connector-line"></div>
+      </div>
     </section>
 
-    <!-- Registration Call To Action Section (Apple style gradient footer box) -->
-    <section id="register" class="cta-section scroll-reveal">
+    <!-- ============================================================
+         FAQ SECTION
+    ============================================================ -->
+    <section class="section faq-section" id="faq">
+      <div class="container container-narrow">
+        <div class="section-eyebrow reveal-up">Got Questions?</div>
+        <h2 class="section-title reveal-up" style="--delay:0.1s">Frequently Asked Questions</h2>
+        <p class="section-desc reveal-up" style="--delay:0.15s">
+          Everything you need to know before registering.
+        </p>
+
+        <div class="faq-list">
+          <div class="faq-item reveal-up" style="--delay:0.1s">
+            <button class="faq-q">
+              <span>Who is eligible to participate?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="faq-a">
+              <p>Hackateer is open to students, developers, UI/UX designers, and industry professionals worldwide. Whether you're a beginner or an expert — build with us.</p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal-up" style="--delay:0.15s">
+            <button class="faq-q">
+              <span>How large can a team be?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="faq-a">
+              <p>Teams range from 1 to 4 individuals. No team? Use our Team Matcher on the portal or attend our virtual forming mixer on Day 1.</p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal-up" style="--delay:0.2s">
+            <button class="faq-q">
+              <span>Is there a registration cost?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="faq-a">
+              <p>Registration is free for most cohorts. We supply API credits, developer tooling keys, digital workspace tools, and swag to all approved hackers.</p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal-up" style="--delay:0.25s">
+            <button class="faq-q">
+              <span>Can I use pre-existing code or templates?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="faq-a">
+              <p>Public boilerplate and open-source libraries are allowed. However, all core implementation logic must be written during the hackathon window. Commit hashes are tracked.</p>
+            </div>
+          </div>
+
+          <div class="faq-item reveal-up" style="--delay:0.3s">
+            <button class="faq-q">
+              <span>How are projects evaluated?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="faq-a">
+              <p>Projects are scored on Engineering Complexity, Product Design, and Originality by an expert panel of startup founders, tech leads, and product designers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA SECTION
+    ============================================================ -->
+    <section class="section cta-section" id="register">
       <div class="container">
-        <div class="cta-banner">
-          <div class="cta-grid">
-            <div class="cta-info">
-              <h2 class="scroll-reveal" style="--delay: 0.1s">Ready to build something unforgettable?</h2>
-              <p class="scroll-reveal" style="--delay: 0.2s">Secure your spot in the summer cohort. Teams are forming now, and API access keys are distributed on a rolling basis.</p>
-              
-              <div class="cta-form-wrapper scroll-reveal" style="--delay: 0.3s">
-                <form id="portal-form" class="cta-form" onsubmit="event.preventDefault(); alert('Success! You are in the queue.');">
-                  <input type="email" placeholder="Enter your developer email" required class="cta-input">
-                  <button type="submit" class="btn-primary btn-cta-submit">
-                    <span>Register Now</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </button>
-                </form>
+        <div class="cta-card reveal-up">
+          <div class="cta-content">
+            <div class="cta-left">
+              <h2 class="cta-title reveal-up" style="--delay:0.1s">Ready to build something...</h2>
+              <p class="cta-sub reveal-up" style="--delay:0.2s">Secure your cohort slot. Teams are forming now, and API keys are distributed on a rolling basis.</p>
+              <form class="cta-form reveal-up" id="cta-form" onsubmit="event.preventDefault(); showSuccess();" style="--delay:0.3s">
+                <input type="email" placeholder="Enter your email address" class="cta-input" required>
+                <button type="submit" class="btn-glow">
+                  <span>Register Now</span>
+                </button>
+              </form>
+              <div class="cta-success" id="cta-success">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>You're in the queue! Check your email.</span>
               </div>
             </div>
-            
-            <div class="cta-visual scroll-reveal" style="--delay: 0.4s">
-              <div class="terminal-mock">
-                <div class="terminal-bar">
-                  <span class="terminal-dot red"></span>
-                  <span class="terminal-dot yellow"></span>
-                  <span class="terminal-dot green"></span>
-                  <span class="terminal-title">bash</span>
+            <div class="cta-right reveal-fade" style="--delay:0.4s">
+              <div class="code-terminal">
+                <div class="ct-bar">
+                  <span class="ct-dot r"></span>
+                  <span class="ct-dot y"></span>
+                  <span class="ct-dot g"></span>
                 </div>
-                <div class="terminal-body">
-                  <div class="terminal-line"><span class="t-prompt">$</span> curl -s https://api.hackateer.build/join</div>
-                  <div class="terminal-line t-response">Checking slots... [OK]</div>
-                  <div class="terminal-line t-response">Analyzing Github portfolio...</div>
-                  <div class="terminal-line t-response">HACKATEER API Keys status: active</div>
-                  <div class="terminal-line"><span class="t-prompt">$</span> npx hackateer-cli register --team=none</div>
-                  <div class="terminal-line t-success">✓ Registration queue join code generated: AE-9402X</div>
-                  <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cursor">_</span></div>
+                <div class="ct-body">
+                  <div class="ct-code-line">
+                    <span class="ct-code-text">code</span><span class="ct-cursor-pipe">|</span>
+                  </div>
+                  <div class="ct-mouse-pointer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4.5 3V17.5L9.2 13.2L14.7 21L17.7 18.9L12.3 11.2L18 10.7L4.5 3Z" fill="#0f172a" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -607,104 +642,111 @@ application.ship();</code></pre>
         </div>
       </div>
     </section>
+
   </main>
 
-  <!-- Footer Section -->
-  <footer class="footer">
-    <div class="container footer-container">
-      <div class="footer-top">
-        <div class="footer-brand scroll-reveal" style="--delay: 0.1s">
-          <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
-            <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block;">
-          </div>
-          <p class="brand-desc">The global arena for code architects and visual engineers. Shape ideas into production code.</p>
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col reveal-up" style="--delay:0.1s">
+          <a href="index.html">
+            <img src="logo.png" alt="Hackateer" class="footer-logo">
+          </a>
+          <p class="footer-tagline">The global arena for code architects and visual engineers. Shape ideas into production.</p>
           <div class="footer-socials">
-            <a href="#" aria-label="Github"><i class="fa-brands fa-github"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
             <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </div>
-        
-        <div class="footer-links-grid scroll-reveal" style="--delay: 0.2s">
-          <div class="footer-column">
-            <h4>Tracks</h4>
-            <ul>
-              <li><a href="#">Artificial Intel</a></li>
-              <li><a href="#">Web3 Systems</a></li>
-              <li><a href="#">Design Languages</a></li>
-              <li><a href="#">Developer Tooling</a></li>
-            </ul>
-          </div>
-          
-          <div class="footer-column">
-            <h4>Event</h4>
-            <ul>
-              <li><a href="#">Schedule</a></li>
-              <li><a href="#">Mentorship Panel</a></li>
-              <li><a href="#">Tracks &amp; Details</a></li>
-              <li><a href="#">Code of Conduct</a></li>
-            </ul>
-          </div>
 
-          <div class="footer-column">
-            <h4>Platform</h4>
-            <ul>
-              <li><a href="#">Portal Dashboard</a></li>
-              <li><a href="#">Hackateer CLI</a></li>
-              <li><a href="#">API Documentation</a></li>
-              <li><a href="#">Static Checker</a></li>
-            </ul>
-          </div>
+        <div class="footer-links-col reveal-up" style="--delay:0.2s">
+          <h4>Tracks</h4>
+          <ul>
+            <li><a href="#">Artificial Intelligence</a></li>
+            <li><a href="#">Web3 Systems</a></li>
+            <li><a href="#">Design Languages</a></li>
+            <li><a href="#">Developer Tooling</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col reveal-up" style="--delay:0.3s">
+          <h4>Event</h4>
+          <ul>
+            <li><a href="#">Schedule</a></li>
+            <li><a href="#">Mentorship Panel</a></li>
+            <li><a href="#">Tracks & Details</a></li>
+            <li><a href="#">Code of Conduct</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col reveal-up" style="--delay:0.4s">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="dashboard.html">Portal Dashboard</a></li>
+            <li><a href="#">CLI Tools</a></li>
+            <li><a href="#">API Documentation</a></li>
+            <li><a href="#">Status Page</a></li>
+          </ul>
         </div>
       </div>
 
-      <div class="footer-bottom scroll-reveal" style="--delay: 0.3s">
-        <p class="copyright">&copy; 2026 Hackateer Foundation. Built for developers with passion. MIT License.</p>
+      <div class="footer-bottom reveal-up" style="--delay:0.5s">
+        <p>&copy; 2026 Hackateer Foundation. Built for developers with passion.</p>
         <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Security Info</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Security</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Core Firebase Scripts & Auth Client -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="firebase-config.js"></script>
   <script src="auth.js"></script>
 
-  <!-- Custom Scripts -->
-  <script src="app.js?v=1.0.1"></script>
+  <!-- App -->
+  <script src="app.js?v=2.0"></script>
   
-  <!-- Dynamic Landing CTA Handlers based on Auth State -->
   <script>
+    // Auth state → update CTAs
     document.addEventListener('DOMContentLoaded', () => {
-      HackateerAuth.checkAuthState(
-        (user) => {
-          // Logged in: Customize landing CTAs for direct portal entry
-          document.querySelectorAll('a[href="dashboard.html"]').forEach(link => {
-            if (link.textContent.trim().toLowerCase().includes('portal login')) {
-              link.innerHTML = '<i class="fa-solid fa-compass"></i> Workspace';
-            }
-            if (link.textContent.trim().toLowerCase().includes('register now')) {
-              link.textContent = 'Enter Workspace';
-            }
-            const span = link.querySelector('span');
-            if (span && span.textContent.trim().toLowerCase().includes('join build portal')) {
-              span.textContent = 'Enter Workspace';
-            }
-          });
-        },
-        () => {
-          // Unauthenticated: Direct Explore buttons straight to login gateway
-          document.querySelectorAll('a[href="dashboard.html"]').forEach(link => {
-            link.href = 'login.html';
-          });
-        }
-      );
+      if (typeof HackateerAuth !== 'undefined') {
+        HackateerAuth.checkAuthState(
+          (user) => {
+            document.querySelectorAll('#hero-cta-primary, #nav-register-btn').forEach(el => {
+              const span = el.querySelector('span');
+              if (span) {
+                span.textContent = el.id === 'hero-cta-primary' ? 'Enter Workspace' : 'Dashboard';
+              } else {
+                el.textContent = el.id === 'hero-cta-primary' ? 'Enter Workspace' : 'Dashboard';
+              }
+            });
+            document.querySelectorAll('a[href="dashboard.html"]').forEach(a => {
+              const txt = a.textContent.trim().toLowerCase();
+              if (txt.includes('portal login')) a.textContent = 'Dashboard';
+            });
+          },
+          () => {
+            document.querySelectorAll('a[href="dashboard.html"]').forEach(a => {
+              a.href = 'login.html';
+            });
+          }
+        );
+      }
+
+      // CTA success
+      window.showSuccess = function() {
+        document.getElementById('cta-form').style.display = 'none';
+        document.getElementById('cta-success').classList.add('visible');
+      };
     });
   </script>
 </body>

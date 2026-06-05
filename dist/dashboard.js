@@ -33,12 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Dynamic count initializer
-    const countLabelInit = document.getElementById('explore-count-label');
-    if (countLabelInit) {
-      const totalCustom = customHacks.length;
-      countLabelInit.textContent = `${totalCustom} active system${totalCustom !== 1 ? 's' : ''}`;
-    }
+    // Dynamic count initializer is removed
 
     grid.innerHTML = ''; // clear initial content
 
@@ -286,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
      4. EXPLORE HACKATHONS TAB FILTERS & SEARCH
      ========================================================================== */
   const searchInput = document.getElementById('dashboard-search');
-  const countLabel = document.getElementById('explore-count-label');
   
   let activeCategory = 'all';
   let searchQuery = '';
@@ -319,9 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    if (countLabel) {
-      countLabel.textContent = `${visibleCount} active event${visibleCount !== 1 ? 's' : ''}`;
-    }
+    // Filter count badge updates removed
   }
 
   if (searchInput) {
