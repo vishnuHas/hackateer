@@ -721,6 +721,7 @@
       if (typeof HackateerAuth !== 'undefined') {
         HackateerAuth.checkAuthState(
           (user) => {
+            // Update primary CTA and nav register button to Dashboard
             document.querySelectorAll('#hero-cta-primary, #nav-register-btn').forEach(el => {
               const span = el.querySelector('span');
               if (span) {
@@ -729,9 +730,9 @@
                 el.textContent = el.id === 'hero-cta-primary' ? 'Enter Workspace' : 'Dashboard';
               }
             });
-            document.querySelectorAll('a[href="dashboard.html"]').forEach(a => {
-              const txt = a.textContent.trim().toLowerCase();
-              if (txt.includes('portal login')) a.textContent = 'Dashboard';
+            // Hide the Portal Login button — nav-register-btn already becomes Dashboard
+            document.querySelectorAll('.btn-portal-login').forEach(a => {
+              a.style.display = 'none';
             });
           },
           () => {
