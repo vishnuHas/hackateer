@@ -23,5 +23,8 @@
   "homepage": "https://github.com/vishnuHas/hackateer#readme",
   "devDependencies": {
     "wrangler": "^4.97.0"
+  },
+  "dependencies": {
+    "jimp": "^1.6.1"
   }
 }

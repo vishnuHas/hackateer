@@ -19,19 +19,19 @@ if (detectFirebaseConfig()) {
   try {
     firebase.initializeApp(firebaseConfig);
     isRealFirebase = true;
-    console.log("Aether Auth: Firebase initialized successfully.");
+    console.log("Hackateer Auth: Firebase initialized successfully.");
   } catch (error) {
-    console.warn("Aether Auth: Firebase initialization failed.", error);
+    console.warn("Hackateer Auth: Firebase initialization failed.", error);
     isRealFirebase = false;
   }
 } else {
-  console.log("Aether Auth: Real Firebase credentials not configured in firebase-config.js.");
+  console.log("Hackateer Auth: Real Firebase credentials not configured in firebase-config.js.");
 }
 
 /**
  * Expose Authentication Service Methods
  */
-const AetherAuth = {
+const HackateerAuth = {
   isFirebaseActive() {
     return isRealFirebase;
   },
@@ -55,6 +55,7 @@ const AetherAuth = {
 
   // Log Out current session
   async signOutUser() {
+    sessionStorage.removeItem('hackateer_mock_user');
     if (isRealFirebase) {
       try {
         await firebase.auth().signOut();
@@ -67,6 +68,18 @@ const AetherAuth = {
 
   // Checks Auth state and registers listener callbacks
   checkAuthState(onUser, onUnauth) {
+    const mockUserJson = sessionStorage.getItem('hackateer_mock_user');
+    if (mockUserJson) {
+      try {
+        const mockUser = JSON.parse(mockUserJson);
+        onUser(mockUser);
+        this.syncHeaderProfile(mockUser);
+        return;
+      } catch (e) {
+        console.error("Failed to parse mock user", e);
+      }
+    }
+
     if (isRealFirebase) {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {

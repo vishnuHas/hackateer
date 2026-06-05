@@ -1,5 +1,5 @@
 /**
- * AETHER Supabase Database Connection Client
+ * HACKATEER Supabase Database Connection Client
  * Instantiates the global supabaseClient instance.
  */
 

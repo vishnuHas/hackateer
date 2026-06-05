@@ -1,12 +1,12 @@
 /**
- * AETHER Explore Hacks Page Logic
+ * HACKATEER Explore Hacks Page Logic
  * Implements category filtering, blueprints grid banner slides, clocks, and RSVP modals.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   
   // Auth Guard Guarding Explore Portal
-  AetherAuth.checkAuthState(
+  HackateerAuth.checkAuthState(
     (user) => {
       // Show screen
       document.body.style.display = 'block';
@@ -33,14 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Dynamic count initializer
-    const countLabelInit = document.getElementById('explore-count-label');
-    if (countLabelInit) {
-      const totalCustom = customHacks.length;
-      countLabelInit.textContent = `${totalCustom} active system${totalCustom !== 1 ? 's' : ''}`;
-    }
+    // Dynamic count initializer is removed
 
     grid.innerHTML = ''; // clear initial content
+
+    function formatRegistrations(count) {
+      if (!count) return '1.4K';
+      if (count >= 1000) {
+        return (count / 1000).toFixed(1).replace('.0', '') + 'K';
+      }
+      return count;
+    }
 
     customHacks.forEach((hack) => {
       const card = document.createElement('div');
@@ -64,35 +67,47 @@ document.addEventListener('DOMContentLoaded', () => {
       const prizePoolText = hack.prize_pool > 0 ? `₹${Number(hack.prize_pool).toLocaleString('en-IN')}` : '₹0';
       
       card.innerHTML = `
-        <img class="card-bg-img" src="${hack.image_url}" alt="${hack.name} Cover">
-        <div class="card-overlay"></div>
-        <div class="card-content">
-          <div class="card-mid">
-            <h3 class="card-title">${hack.name}</h3>
-            <div class="card-meta-info">
-              <span class="host-name-label">${hack.host || 'Admin Managed'}</span>
-              <span class="date-label">• ${formatDate(hack.start_date)} - ${formatDate(hack.end_date)}</span>
-              <span class="builders-label"><i class="fa-solid fa-user-group"></i> ${hack.total_registrations_count || (hack.team_min + '-' + hack.team_max)}</span>
-            </div>
-            <p class="card-desc">${hack.description}</p>
+        <div class="card-left-col">
+          <span class="card-eyebrow">${primaryTag.toUpperCase()}</span>
+          <h3 class="card-title">${hack.name}</h3>
+          <div class="card-meta">
+            <span class="host">${hack.host || 'Admin Managed'}</span>
+            <span class="separator">•</span>
+            <span class="dates">${formatDate(hack.start_date)} - ${formatDate(hack.end_date)}</span>
           </div>
-          <div class="card-bottom">
-            <div class="card-bottom-indicators">
-              <div class="price-indicator">
-                <span class="price-amount">${priceText}</span>
-                <span class="price-label">Entry Fee</span>
-              </div>
-              <div class="prize-indicator">
-                <span class="price-amount">${prizePoolText}</span>
-                <span class="price-label">Prize Pool</span>
+          
+          <div class="card-features">
+            <div class="feature-item">
+              <i class="fa-solid fa-rocket feature-icon"></i>
+              <div class="feature-text">
+                <span class="feature-title">BUILD IN PUBLIC</span>
+                <span class="feature-desc">Share progress</span>
               </div>
             </div>
-            <div class="card-actions-wrapper">
-              <button class="btn-share-event" title="Copy Share Link">
-                <i class="fa-solid fa-share-nodes"></i>
-              </button>
-              <button class="btn-primary btn-join-event">Register</button>
+            <div class="feature-item">
+              <i class="fa-solid fa-trophy feature-icon"></i>
+              <div class="feature-text">
+                <span class="feature-title">EARN REWARDS</span>
+                <span class="feature-desc">Win prizes</span>
+              </div>
             </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-users feature-icon"></i>
+              <div class="feature-text">
+                <span class="feature-title">COLLABORATE</span>
+                <span class="feature-desc">Work with teams</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-right-col">
+          <div class="card-illustration-container">
+            <img class="card-illustration" src="${hack.image_url}" alt="${hack.name} Cover">
+          </div>
+          <div class="card-right-bottom">
+            <button class="btn-share-event" title="Copy Share Link">
+              <i class="fa-solid fa-share-nodes"></i>
+            </button>
           </div>
         </div>
       `;
@@ -266,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
      4. EXPLORE HACKATHONS TAB FILTERS & SEARCH
      ========================================================================== */
   const searchInput = document.getElementById('dashboard-search');
-  const countLabel = document.getElementById('explore-count-label');
   
   let activeCategory = 'all';
   let searchQuery = '';
@@ -299,9 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    if (countLabel) {
-      countLabel.textContent = `${visibleCount} active event${visibleCount !== 1 ? 's' : ''}`;
-    }
+    // Filter count badge updates removed
   }
 
   if (searchInput) {

@@ -1,5 +1,5 @@
 /**
- * AETHER Landing Page Interactions
+ * HACKATEER Landing Page Interactions
  * Implements high-fidelity, fluid UI animations, interactive widgets, and 3D effects.
  */
 
@@ -408,16 +408,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const cliCommandsData = {
     init: {
-      cmd: "aether init",
+      cmd: "hackateer init",
       output: "✓ Workspace successfully setup! Type \"dev\" to begin."
     },
     dev: {
-      cmd: "aether dev",
+      cmd: "hackateer dev",
       output: "⚙ Spinning up local bundlers...\n✓ Dev server listening on port 3000.\n✓ Watching files for changes... [OK]"
     },
     deploy: {
-      cmd: "aether deploy",
-      output: "⚡ Analysing assets structure...\n✓ Verification pipeline: passed\n🚀 Shipped to Aether Edge: https://aether.build/ae-9402x"
+      cmd: "hackateer deploy",
+      output: "⚡ Analysing assets structure...\n✓ Verification pipeline: passed\n🚀 Shipped to Hackateer Edge: https://hackateer.build/ae-9402x"
     }
   };
 

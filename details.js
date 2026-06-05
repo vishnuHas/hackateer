@@ -1,5 +1,5 @@
 /**
- * AETHER Cohort Details Page Logic
+ * HACKATEER Cohort Details Page Logic
  * 3-step registration wizard: Team+Idea → Fee → Confirm
  * Registrations stored in Supabase `registrations` table.
  * Admin can approve/reject each team based on their idea.
@@ -8,7 +8,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // Auth Guard
-  AetherAuth.checkAuthState(
+  HackateerAuth.checkAuthState(
     (user) => {
       document.body.style.display = 'block';
       initCohortDetails();
@@ -1017,5 +1017,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   updateClock();
   setInterval(updateClock, 1000);
+
+  /* ==========================================================================
+     NAVBAR SCROLL STATE
+  ========================================================================== */
+  const header = document.querySelector('.navbar-container');
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
 
 });

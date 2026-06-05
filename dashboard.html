@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER | Explore Hackathons</title>
+  <title>HACKATEER | Explore Hackathons</title>
   
   <!-- Google Fonts: Space Grotesk and Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,9 +24,7 @@
   <!-- Header Navigation -->
   <header class="navbar-container">
     <nav class="navbar">
-      <div class="nav-logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
-        <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block;">
-      </div>
+      <a class="nav-brand" href="index.html">Hackateer</a>
       
       <div class="nav-actions">
         <button class="icon-action-btn" aria-label="Notifications" id="btn-notifications">
@@ -58,43 +56,13 @@
         <div class="banner-text">
           <span class="banner-meta">WORKSPACE ARENA</span>
           <h1 class="banner-title">
-            BUILD. <span class="accent-glow">ITERATE</span>. SHIP.
+            <span class="title-word">BUILD.</span>
+            <span class="title-word accent-glow">ITERATE.</span>
+            <span class="title-word">SHIP.</span>
           </h1>
           <p class="banner-desc">
-            Enter Aether's decentralized workspace. Connect with verified developers, audit codebase pipelines, and deploy production-grade software during active cohorts.
+            Enter Hackateer's decentralized workspace. Connect with verified developers, audit codebase pipelines, and deploy production-grade software during active cohorts.
           </p>
-        </div>
-        
-        <!-- Banner Right: Unique Bento Spotlight Layout (Not carousel) -->
-        <div class="banner-bento-spotlight">
-          <!-- Main featured card -->
-          <div class="bento-main-card">
-            <div class="bento-card-bg" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&h=300&fit=crop');"></div>
-            <div class="bento-card-content">
-              <span class="bento-badge">ACTIVE NOW</span>
-              <h3>Aether Space Hack '26</h3>
-              <p>Design spatial interfaces and canvas layouts for local OS systems.</p>
-              <div class="bento-meta">
-                <span><i class="fa-solid fa-user-group"></i> 1,472 Registered</span>
-                <span class="time-label"><i class="fa-regular fa-clock"></i> 8 hours left</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Stacked mini secondary features -->
-          <div class="bento-side-stack">
-            <div class="bento-side-item">
-              <span class="side-item-tag">AI SYSTEMS</span>
-              <h4>Neural Agent Sandbox</h4>
-              <p>Autonomous pipelines via browser LLMs.</p>
-            </div>
-            
-            <div class="bento-side-item">
-              <span class="side-item-tag">WEB3</span>
-              <h4>Zero-Knowledge Devs</h4>
-              <p>Secure client proofing pipelines.</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -108,7 +76,6 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" placeholder="Search workspace..." id="dashboard-search">
           </div>
-          <span class="total-cohorts-badge" id="explore-count-label">6 active systems</span>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER | Gatekeeper Authentication</title>
+  <title>HACKATEER | Gatekeeper Authentication</title>
   
   <!-- Google Fonts: Space Grotesk and Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -147,18 +147,16 @@
     }
 
     /* Logo stack */
-    .logo-wrapper {
-      margin-bottom: 24px;
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-    }
-
-    .nav-logo-img {
-      height: 65px;
-      width: auto;
-      object-fit: contain;
-      display: block;
+      margin-bottom: 24px;
     }
 
     .login-title {
@@ -291,9 +289,7 @@
   <!-- Card Wrapper -->
   <div class="login-container">
     <div class="login-card">
-      <div class="logo-wrapper" onclick="window.location.href='index.html'" style="cursor: pointer;">
-        <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 65px; width: auto; max-height: 65px; object-fit: contain; display: block;">
-      </div>
+      <a class="nav-brand" href="index.html">Hackateer</a>
       
       <h1 class="login-title">Workspace Gate</h1>
       <p class="login-subtitle">Authenticate via your Chrome Google profile to verify developer credentials and audit active project builds.</p>
@@ -303,10 +299,6 @@
           <i class="fa-brands fa-google"></i>
           <span>Sign in with Google</span>
         </button>
-      </div>
-
-      <div class="login-footer">
-        Aether Systems © 2026. Code secure. <a href="index.html">Back to Home</a>
       </div>
     </div>
   </div>
@@ -321,14 +313,14 @@
     document.addEventListener('DOMContentLoaded', () => {
       
       // Redirect if already authenticated
-      AetherAuth.checkAuthState(
+      HackateerAuth.checkAuthState(
         (user) => {
           // Logged in! Go to dashboard
           window.location.href = 'dashboard.html';
         },
         () => {
           // Unauthenticated, stay on this page
-          console.log("Aether Auth: Awaiting developer sign-in...");
+          console.log("Hackateer Auth: Awaiting developer sign-in...");
         }
       );
 
@@ -336,7 +328,7 @@
 
       // 1. Google Auth handler
       googleBtn.addEventListener('click', async () => {
-        if (!AetherAuth.isFirebaseActive()) {
+        if (!HackateerAuth.isFirebaseActive()) {
           alert("Firebase keys are not configured. Please enter your credentials in 'firebase-config.js'.");
           return;
         }
@@ -344,7 +336,7 @@
         try {
           googleBtn.disabled = true;
           googleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting...';
-          const user = await AetherAuth.signInWithGoogle();
+          const user = await HackateerAuth.signInWithGoogle();
           console.log("Logged in:", user);
           window.location.href = 'dashboard.html';
         } catch (err) {

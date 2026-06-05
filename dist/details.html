@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER | Hackathon Details</title>
+  <title>HACKATEER | Hackathon Details</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,12 +16,10 @@
 
   <header class="navbar-container">
     <nav class="navbar">
-      <div class="nav-logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
-        <img src="logo.png" alt="Hackateer Logo" class="nav-logo-img" style="height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block;">
-      </div>
+      <a class="nav-brand" href="index.html">Hackateer</a>
       <div class="nav-actions">
-        <a href="dashboard.html" class="btn-secondary nav-back-btn">
-          <i class="fa-solid fa-arrow-left"></i> Back to Explorer
+        <a href="dashboard.html" class="icon-action-btn nav-back-btn" aria-label="Back to Explorer" id="btn-back">
+          <i class="fa-solid fa-arrow-left"></i>
         </a>
         <div class="live-clock" id="live-clock">18:00</div>
         <div class="user-profile-menu">
@@ -32,23 +30,26 @@
     </nav>
   </header>
 
+  <!-- Spotlight Banner for Details Page -->
+  <section class="details-banner-section">
+    <div class="details-banner-container">
+      <span class="banner-meta" id="detail-host" style="display: none;"></span>
+      <h1 class="banner-title" id="detail-title">Hackathon Title</h1>
+      <div class="banner-meta-row">
+        <span><i class="fa-regular fa-calendar-days"></i> <span id="detail-dates-top">Dates</span></span>
+        <span class="separator">•</span>
+        <span><i class="fa-solid fa-user-group"></i> <span id="detail-registered-count">0</span> Registered</span>
+      </div>
+    </div>
+  </section>
+
   <div class="details-wrapper">
     <div class="details-container">
       <main class="details-main-content">
-        <section class="details-hero">
-          <div class="details-cover-wrapper">
-            <img id="detail-cover" src="" alt="Hackathon Cover Image">
-            <div class="cover-overlay"></div>
-          </div>
-          <div class="details-header-meta">
-            <span class="host-label" id="detail-host">Admin Managed</span>
-            <h1 class="details-title" id="detail-title">Hackathon Title</h1>
-            <div class="meta-row">
-              <span><i class="fa-regular fa-calendar-days"></i> <span id="detail-dates-top">Dates</span></span>
-              <span><i class="fa-solid fa-user-group"></i> <span id="detail-registered-count">0</span> Registered</span>
-            </div>
-          </div>
-        </section>
+        <!-- Cover Image Card -->
+        <div class="details-cover-card">
+          <img id="detail-cover" src="" alt="Hackathon Cover Image">
+        </div>
 
         <nav class="details-tabs">
           <a href="#about" class="tab-link active">About</a>
@@ -80,10 +81,6 @@
 
       <aside class="details-sidebar-content">
         <div class="sticky-sidebar-card">
-          <div class="status-indicator-badge">
-            <span class="status-dot-pulse"></span>
-            <span class="status-badge-text">REGISTRATION OPEN</span>
-          </div>
           <div class="sidebar-spec-row">
             <div class="spec-icon"><i class="fa-solid fa-tag"></i></div>
             <div class="spec-details">

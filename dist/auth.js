@@ -19,19 +19,19 @@ if (detectFirebaseConfig()) {
   try {
     firebase.initializeApp(firebaseConfig);
     isRealFirebase = true;
-    console.log("Aether Auth: Firebase initialized successfully.");
+    console.log("Hackateer Auth: Firebase initialized successfully.");
   } catch (error) {
-    console.warn("Aether Auth: Firebase initialization failed.", error);
+    console.warn("Hackateer Auth: Firebase initialization failed.", error);
     isRealFirebase = false;
   }
 } else {
-  console.log("Aether Auth: Real Firebase credentials not configured in firebase-config.js.");
+  console.log("Hackateer Auth: Real Firebase credentials not configured in firebase-config.js.");
 }
 
 /**
  * Expose Authentication Service Methods
  */
-const AetherAuth = {
+const HackateerAuth = {
   isFirebaseActive() {
     return isRealFirebase;
   },
